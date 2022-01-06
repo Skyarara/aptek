@@ -3,7 +3,7 @@
 - Alvon Danila Sukardi - 2440078411
 - Muh. Rizal Sakti Djatmieka - 2440099946
 
-[Computer Science Bina Nusantara University B2024 Project](https://binus.ac.id/malang)
+[Computer Science Bina Nusantara University B2024 Project](https://binus.ac.id/malang target="blank")
 
 # [Material Dashboard 2](http://demos.creative-tim.com/material-dashboard/pages/dashboard.html?ref=readme-md2) [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)](https://twitter.com/intent/tweet?url=https://www.creative-tim.com/product/material-dashboard&text=Check%20Material%20Dashboard%202%20made%20by%20@CreativeTim%20#webdesign%20#dashboard%20#materialdesign%20#html%20https://www.creative-tim.com/product/material-dashboard)
 
