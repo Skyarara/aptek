@@ -1,6 +1,6 @@
 # [TIM HewwoDoc]
 - Nicolaus Avenito - 2440010284
-- Alvon Danila Sukardi - 2440078411
+- Alvon Danilo Sukardi - 2440078411
 - Muh. Rizal Sakti Djatmieka - 2440099946
 
 [Computer Science Bina Nusantara University B2024](https://binus.ac.id/malang)
