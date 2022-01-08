@@ -45,7 +45,7 @@ $query = mysqli_query($conn, $sql);
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
         aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href="#" target="_blank">
-        <img src="../assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
+        <img src="../../assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
         <span class="ms-1 font-weight-bold text-white">HewoDocc</span>
       </a>
     </div>
@@ -126,13 +126,13 @@ $query = mysqli_query($conn, $sql);
             <div class="form-grop row">
               <div class="col">
                 <div class="input-group input-group-dynamic mb-4 col-xs-2">
-                  <label class="form-label">Kode Obat</label>
+                  <label class="form-label">Kode Tipe Obat</label>
                   <input type="text" name='kode' class="form-control" required>
                 </div>
               </div>
               <div class="col">
                 <div class="input-group input-group-dynamic mb-4 col-xs-2">
-                  <label class='form-label'>Nama Obat</label>
+                  <label class='form-label'>Nama Tipe Obat</label>
                   <input type="text" name='nama' class="form-control" required>
                 </div>
               </div>
@@ -145,16 +145,16 @@ $query = mysqli_query($conn, $sql);
             <thead>
               <tr>
                 <th>Nomor</th>
-                <th>Kode Type</th>
-                <th>Nama Produk</th>
+                <th>Kode Tipe Obat</th>
+                <th>Nama Tipe Obat</th>
                 <th>Aksi</th>
               </tr>
             </thead>
             <tfoot>
               <tr>
                 <th>Nomor</th>
-                <th>Kode Type</th>
-                <th>Nama Tipe</th>
+                <th>Kode Tipe Obat</th>
+                <th>Nama Tipe Obat</th>
                 <th>Aksi</th>
               </tr>
             </tfoot>

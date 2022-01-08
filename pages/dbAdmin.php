@@ -43,6 +43,7 @@ require 'cekAdmin.php';
   <!-- table -->
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+  
 
 </head>
 
@@ -59,7 +60,7 @@ require 'cekAdmin.php';
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-white active bg-gradient-primary" href="../pages/dbAdmin.php">
+          <a class="nav-link text-white active bg-gradient-danger" href="../pages/dbAdmin.php">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">dashboard</i>
             </div>
@@ -120,76 +121,108 @@ require 'cekAdmin.php';
     </nav>
     <!-- End Navbar -->
     <div class="container-fluid py-4">
-      
-        <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-table mr-1"></i>
-                                Daftar Produk
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th>ID Produk</th>
-                                                <th>ID Kategori</th>
-                                                <th>Nama Produk</th>
-                                                <th>Harga Produk</th>
-                                                <th>Stok</th>
-                                            </tr>
-                                        </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <th>ID Produk</th>
-                                                <th>ID Kategori</th>
-                                                <th>Nama Produk</th>
-                                                <th>Harga Produk</th>
-                                                <th>Stok</th>
-                                            </tr>
-                                        </tfoot>
-                                        <tbody>
-                                            <tr>
-                                                <th>1</th>
-                                                <th>1</th>
-                                                <th>Ultra Flu</th>
-                                                <th>Rp. 12.000</th>
-                                                <th>513</th>
-                                            </tr>
-                                            <tr>
-                                                <th>2</th>
-                                                <th>1</th>
-                                                <th>OBH Combi</th>
-                                                <th>Rp. 29.000</th>
-                                                <th>219</th>
-                                            </tr>
-                                            <tr>
-                                                <th>3</th>
-                                                <th>2</th>
-                                                <th>Entrostop</th>
-                                                <th>Rp. 23.500</th>
-                                                <th>878</th>
-                                            </tr>
-                                            <tr>
-                                                <th>4</th>
-                                                <th>3</th>
-                                                <th>Paracetamol Untuk Anak</th>
-                                                <th>Rp. 50.000</th>
-                                                <th>654</th>
-                                            </tr>
-                                            <tr>
-                                                <th>5</th>
-                                                <th>3</th>
-                                                <th>Panadol</th>
-                                                <th>Rp. 14.000</th>
-                                                <th>455</th>
-                                            </tr>
-                                            
-                                            
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+      <div class="card mb-4">
+        <div class="card-header">
+          <i class="fas fa-table mr-1"></i>
+          Daftar Produk
+        </div>
+        <div class="card-body">
+          <!-- form tambah -->
+              <!-- <form action='tambah.php' method='POST'>
+                <div class="form-group row">
+                  <div class="col">
+                    <div class="input-group input-group-dynamic mb-4 col-xs-2">
+                      <label class="form-label">Kode Tipe Obat</label>
+                      <input type="text" name='kode' class="form-control" required>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group input-group-dynamic mb-4 col-xs-2">
+                      <label class='form-label'>Nama Tipe Obat</label>
+                      <input type="text" name='nama' class="form-control" required>
+                    </div>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Tambah</button>
+              </form> -->
+
+              <form action='produk/tambahbaru.php' method='POST' enctype="multipart/form-data">
+                <div class="form-group">
+                  <div class="input-group input-group-dynamic mb-4 col-xs-2">
+                    <label class="form-label">Kode Obat</label>
+                    <input type="text" name='idProduk' class="form-control" required>
+                  </div>
+                  <div class="input-group input-group-dynamic mb-4 col-xs-2">
+                    <label class='form-label'>Nama Obat</label>
+                    <input type="text" name='nama' class="form-control" required>
+                  </div>
+                  <div class="input-group input-group-dynamic mb-4 col-xs-2">
+                    <!-- <label class="form-label">Kode Tipe Obat</label> -->
+                    <select name='idType' placeholder="Kategori Obat" class="form-control" required>
+                      <?php
+                        $ambilKategori = mysqli_query($conn,"SELECT * FROM typeproduk");
+                        while($fetchArray = mysqli_fetch_array($ambilKategori)){
+                          $nama = $fetchArray['nama'];
+                          $id = $fetchArray['idType'];
+                      ?>
+
+                      <option value="<?=$id;?>"><?=$nama?></option>
+
+                      <?php
+                        }
+                      ?>
+                    </select>
+                  </div>
+                  <div class="input-group input-group-dynamic mb-4 col-xs-2">
+                    <label class='form-label'>Harga</label>
+                    <input type="number" name='harga' class="form-control" required>
+                  </div>
+                  <div class="input-group input-group-dynamic mb-4 col-xs-2">
+                    <label class='form-label'>Jumlah Barang</label>
+                    <input type="number" name='stok' class="form-control" required>
+                  </div>
+                  <div class="input-group input-group-dynamic mb-4 col-xs-2">
+                    <!-- <label class='form-label'>Upload Gambar</label> -->
+                    <input type="file" name='gambar' class="form-control" required>
+                  </div>
+                </div>
+                <button type="submit" name="tambah" class="btn btn-danger">Tambah Produk Baru</button>
+              </form>
+
+              <!-- end form -->
+            <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                      <tr>
+                          <th>ID Produk</th>
+                          <th>ID Kategori</th>
+                          <th>Nama Produk</th>
+                          <th>Harga Produk</th>
+                          <th>Stok</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <?php
+                          $ambilProduk = mysqli_query($conn,"SELECT * FROM produk");
+                          while($fetchArray = mysqli_fetch_array($ambilProduk)){
+                      ?>
+                      <tr>
+                          <td><?= $fetchArray['idProduk'] ?></td>
+                          <td><?= $fetchArray['idType'] ?></td>
+                          <td><?= $fetchArray['nama'] ?></td>
+                          <td><?= $fetchArray['harga'] ?></td>
+                          <td><?= $fetchArray['stok'] ?></td>
+                      </tr>
+                      <?php
+                          }
+                      ?>
+                  </tbody>
+
+              </table>
+            </div>
+        </div>
+      </div>
+    </div>               
         
       </div>
       <footer class="footer py-4  ">
@@ -205,6 +238,7 @@ require 'cekAdmin.php';
         </div>
       </footer>
     </div>
+    
   </main>
   
   <!--   Core JS Files   -->
@@ -212,254 +246,7 @@ require 'cekAdmin.php';
   <script src="../assets/js/core/bootstrap.min.js"></script>
   <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-  <script src="../assets/js/plugins/chartjs.min.js"></script>
-  <script>
-    var ctx = document.getElementById("chart-bars").getContext("2d");
-
-    new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: ["M", "T", "W", "T", "F", "S", "S"],
-        datasets: [{
-          label: "Sales",
-          tension: 0.4,
-          borderWidth: 0,
-          borderRadius: 4,
-          borderSkipped: false,
-          backgroundColor: "rgba(255, 255, 255, .8)",
-          data: [50, 20, 10, 22, 50, 10, 40],
-          maxBarThickness: 6
-        }, ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
-          }
-        },
-        interaction: {
-          intersect: false,
-          mode: 'index',
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: true,
-              drawOnChartArea: true,
-              drawTicks: false,
-              borderDash: [5, 5],
-              color: 'rgba(255, 255, 255, .2)'
-            },
-            ticks: {
-              suggestedMin: 0,
-              suggestedMax: 500,
-              beginAtZero: true,
-              padding: 10,
-              font: {
-                size: 14,
-                weight: 300,
-                family: "Roboto",
-                style: 'normal',
-                lineHeight: 2
-              },
-              color: "#fff"
-            },
-          },
-          x: {
-            grid: {
-              drawBorder: false,
-              display: true,
-              drawOnChartArea: true,
-              drawTicks: false,
-              borderDash: [5, 5],
-              color: 'rgba(255, 255, 255, .2)'
-            },
-            ticks: {
-              display: true,
-              color: '#f8f9fa',
-              padding: 10,
-              font: {
-                size: 14,
-                weight: 300,
-                family: "Roboto",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-        },
-      },
-    });
-
-
-    var ctx2 = document.getElementById("chart-line").getContext("2d");
-
-    new Chart(ctx2, {
-      type: "line",
-      data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        datasets: [{
-          label: "Mobile apps",
-          tension: 0,
-          borderWidth: 0,
-          pointRadius: 5,
-          pointBackgroundColor: "rgba(255, 255, 255, .8)",
-          pointBorderColor: "transparent",
-          borderColor: "rgba(255, 255, 255, .8)",
-          borderColor: "rgba(255, 255, 255, .8)",
-          borderWidth: 4,
-          backgroundColor: "transparent",
-          fill: true,
-          data: [50, 40, 300, 320, 500, 350, 200, 230, 500],
-          maxBarThickness: 6
-
-        }],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
-          }
-        },
-        interaction: {
-          intersect: false,
-          mode: 'index',
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: true,
-              drawOnChartArea: true,
-              drawTicks: false,
-              borderDash: [5, 5],
-              color: 'rgba(255, 255, 255, .2)'
-            },
-            ticks: {
-              display: true,
-              color: '#f8f9fa',
-              padding: 10,
-              font: {
-                size: 14,
-                weight: 300,
-                family: "Roboto",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-          x: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false,
-              borderDash: [5, 5]
-            },
-            ticks: {
-              display: true,
-              color: '#f8f9fa',
-              padding: 10,
-              font: {
-                size: 14,
-                weight: 300,
-                family: "Roboto",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-        },
-      },
-    });
-
-    var ctx3 = document.getElementById("chart-line-tasks").getContext("2d");
-
-    new Chart(ctx3, {
-      type: "line",
-      data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        datasets: [{
-          label: "Mobile apps",
-          tension: 0,
-          borderWidth: 0,
-          pointRadius: 5,
-          pointBackgroundColor: "rgba(255, 255, 255, .8)",
-          pointBorderColor: "transparent",
-          borderColor: "rgba(255, 255, 255, .8)",
-          borderWidth: 4,
-          backgroundColor: "transparent",
-          fill: true,
-          data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-          maxBarThickness: 6
-
-        }],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
-          }
-        },
-        interaction: {
-          intersect: false,
-          mode: 'index',
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: true,
-              drawOnChartArea: true,
-              drawTicks: false,
-              borderDash: [5, 5],
-              color: 'rgba(255, 255, 255, .2)'
-            },
-            ticks: {
-              display: true,
-              padding: 10,
-              color: '#f8f9fa',
-              font: {
-                size: 14,
-                weight: 300,
-                family: "Roboto",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-          x: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false,
-              borderDash: [5, 5]
-            },
-            ticks: {
-              display: true,
-              color: '#f8f9fa',
-              padding: 10,
-              font: {
-                size: 14,
-                weight: 300,
-                family: "Roboto",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-        },
-      },
-    });
-  </script>
+  
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -469,6 +256,7 @@ require 'cekAdmin.php';
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
   </script>
+
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
