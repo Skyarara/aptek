@@ -12,6 +12,44 @@
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
+<?php 
+ 
+include 'loginconfig.php';
+ 
+error_reporting(0);
+ 
+session_start();
+ 
+if (isset($_SESSION['username'])) {
+    header("Location: sign-in.php");
+}
+ 
+if (isset($_POST['submit'])) {
+    $email = $_POST['email'];
+    $password = md5($_POST['password']);
+ 
+    
+        $sql = "SELECT * FROM customer WHERE email='$email'";
+        $result = mysqli_query($conn, $sql);
+        if (!$result->num_rows > 0) {
+            $sql = "INSERT INTO customer (email, password)
+                    VALUES ('$email', '$password')";
+            $result = mysqli_query($conn, $sql);
+            if ($result) {
+                echo "<script>alert('Selamat, registrasi berhasil!')</script>";
+                $email = "";
+                $_POST['password'] = "";
+            } else {
+                echo "<script>alert('Woops! Terjadi kesalahan.')</script>";
+            }
+        } else {
+            echo "<script>alert('Woops! Email Sudah Terdaftar.')</script>";
+        }
+         
+    } 
+  
+ 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -59,18 +97,18 @@
                   <p class="mb-0">Masukkan Email dan password untuk mendaftarkan diri pada sistem.</p>
                 </div>
                 <div class="card-body">
-                  <form role="form">
+                  <form role="form" action="" method="POST" class="login-email">
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Nama</label>
                       <input type="text" class="form-control">
                     </div>
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Email</label>
-                      <input type="email" class="form-control">
+                      <input type="email" class="form-control" name="email" value="<?php echo $email; ?>" required>
                     </div>
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Password</label>
-                      <input type="password" class="form-control">
+                      <input type="password" class="form-control" name="password" value="<?php echo $_POST['password']; ?>" required>
                     </div>
                     <div class="form-check form-check-info text-start ps-0">
                       <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
@@ -79,7 +117,7 @@
                       </label>
                     </div>
                     <div class="text-center">
-                      <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Sign Up</button>
+                      <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0" button name="submit">Sign Up</button>
                     </div>
                   </form>
                 </div>
