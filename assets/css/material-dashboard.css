@@ -12642,7 +12642,7 @@ textarea.form-control-lg {
   .btn-primary.focus, .btn-primary:focus,
   .btn.bg-gradient-primary.focus,
   .btn.bg-gradient-primary:focus {
-    color: #fff; }
+    color: #000; }
 
 .btn-outline-primary {
   box-shadow: none; }
@@ -12877,8 +12877,8 @@ textarea.form-control-lg {
   box-shadow: 0 3px 3px 0 rgba(255, 255, 255, 0.15), 0 3px 1px -2px rgba(255, 255, 255, 0.2), 0 1px 5px 0 rgba(255, 255, 255, 0.15); }
   .btn-white:hover,
   .btn.bg-gradient-white:hover {
-    background-color: #fff;
-    border-color: #fff;
+    background-color: #000;
+    border-color: #000;
     box-shadow: 0 14px 26px -12px rgba(255, 255, 255, 0.4), 0 4px 23px 0 rgba(255, 255, 255, 0.15), 0 8px 10px -5px rgba(255, 255, 255, 0.2); }
   .btn-white .btn.bg-outline-white,
   .btn.bg-gradient-white .btn.bg-outline-white {
@@ -13889,10 +13889,10 @@ body.dark-version {
     left: -5px; }
   .form-switch .form-check-input:checked:after {
     transform: translateX(21px);
-    border-color: #42424a; }
+    border-color: #ADD8E6; }
   .form-switch .form-check-input:checked {
-    border-color: #42424a;
-    background-color: #42424a; }
+    border-color: #ADD8E6;
+    background-color: #ADD8E6; }
     .form-switch .form-check-input:checked:active:after {
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06), 0 0 0 15px rgba(53, 71, 102, 0.1); }
   .form-switch .form-check-input:active:after {
