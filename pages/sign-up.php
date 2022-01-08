@@ -20,25 +20,22 @@ error_reporting(0);
  
 session_start();
  
-if (isset($_SESSION['username'])) {
-    header("Location: sign-in.php");
-}
- 
-if (isset($_POST['submit'])) {
+ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $password = md5($_POST['password']);
+    $nama = $_POST['nama'];
+    $umur = $_POST['umur'];
+    $alamat = $_POST['alamat'];
  
     
         $sql = "SELECT * FROM customer WHERE email='$email'";
         $result = mysqli_query($conn, $sql);
-        if (!$result->num_rows > 0) {
-            $sql = "INSERT INTO customer (email, password)
-                    VALUES ('$email', '$password')";
+        if ($result-> num_rows == 0) {
+            $sql = "INSERT INTO customer (nama,umur,alamat,email,password)
+                    VALUES ('$nama','$umur','$alamat','$email', '$password')";
             $result = mysqli_query($conn, $sql);
             if ($result) {
                 echo "<script>alert('Selamat, registrasi berhasil!')</script>";
-                $email = "";
-                $_POST['password'] = "";
             } else {
                 echo "<script>alert('Woops! Terjadi kesalahan.')</script>";
             }
@@ -100,15 +97,23 @@ if (isset($_POST['submit'])) {
                   <form role="form" action="" method="POST" class="login-email">
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Nama</label>
-                      <input type="text" class="form-control">
+                      <input type="text" class="form-control" name="nama" required>
+                    </div>
+                    <div class="input-group input-group-outline mb-3">
+                      <label class="form-label">Umur</label>
+                      <input type="number" class="form-control" name="umur" required>
+                    </div>
+                    <div class="input-group input-group-outline mb-3">
+                      <label class="form-label">Alamat</label>
+                      <input type="text" class="form-control" name="alamat" required>
                     </div>
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Email</label>
-                      <input type="email" class="form-control" name="email" value="<?php echo $email; ?>" required>
+                      <input type="email" class="form-control" name="email" required>
                     </div>
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Password</label>
-                      <input type="password" class="form-control" name="password" value="<?php echo $_POST['password']; ?>" required>
+                      <input type="password" class="form-control" name="password" required>
                     </div>
                     <div class="form-check form-check-info text-start ps-0">
                       <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
@@ -117,14 +122,14 @@ if (isset($_POST['submit'])) {
                       </label>
                     </div>
                     <div class="text-center">
-                      <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0" button name="submit">Sign Up</button>
+                      <button type="submit" id="submit" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0" name="submit">Sign Up</button>
                     </div>
                   </form>
                 </div>
                 <div class="card-footer text-center pt-0 px-lg-2 px-1">
                   <p class="mb-2 text-sm mx-auto">
                     Sudah terdaftar?
-                    <a href="../pages/sign-in.html" class="text-primary text-gradient font-weight-bold">Sign in</a>
+                    <a href="../pages/sign-in.php" class="text-primary text-gradient font-weight-bold">Sign in</a>
                   </p>
                 </div>
               </div>
