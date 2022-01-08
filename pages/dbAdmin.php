@@ -30,7 +30,8 @@ require 'cekAdmin.php';
     Admin Dashboard
   </title>
   <!--     Fonts and icons     -->
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+  <link rel="stylesheet" type="text/css"
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
   <!-- Nucleo Icons -->
   <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
   <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
@@ -40,17 +41,22 @@ require 'cekAdmin.php';
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
   <link id="pagestyle" href="../assets/css/material-dashboard.css?" rel="stylesheet" />
+
   <!-- table -->
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
-  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
-  
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js">
+  </script>
+
 
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
-  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
+  <aside
+    class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark"
+    id="sidenav-main">
     <div class="sidenav-header">
-      <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+      <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
+        aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href="#" target="_blank">
         <img src="../assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
         <span class="ms-1 font-weight-bold text-white">HewoDocc</span>
@@ -83,7 +89,7 @@ require 'cekAdmin.php';
             <span class="nav-link-text ms-1">Transaksi Keluar</span>
           </a>
         </li>
-        
+
       </ul>
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
@@ -93,7 +99,8 @@ require 'cekAdmin.php';
   </aside>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
-    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
+      navbar-scroll="true">
       <div class="container-fluid py-1 px-3">
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -128,7 +135,7 @@ require 'cekAdmin.php';
         </div>
         <div class="card-body">
           <!-- form tambah -->
-              <!-- <form action='tambah.php' method='POST'>
+          <!-- <form action='tambah.php' method='POST'>
                 <div class="form-group row">
                   <div class="col">
                     <div class="input-group input-group-dynamic mb-4 col-xs-2">
@@ -146,107 +153,129 @@ require 'cekAdmin.php';
                 <button type="submit" class="btn btn-primary">Tambah</button>
               </form> -->
 
-              <form action='produk/tambahbaru.php' method='POST' enctype="multipart/form-data">
-                <div class="form-group">
-                  <div class="input-group input-group-dynamic mb-4 col-xs-2">
-                    <label class="form-label">Kode Obat</label>
-                    <input type="text" name='idProduk' class="form-control" required>
-                  </div>
-                  <div class="input-group input-group-dynamic mb-4 col-xs-2">
-                    <label class='form-label'>Nama Obat</label>
-                    <input type="text" name='nama' class="form-control" required>
-                  </div>
-                  <div class="input-group input-group-dynamic mb-4 col-xs-2">
-                    <!-- <label class="form-label">Kode Tipe Obat</label> -->
-                    <select name='idType' placeholder="Kategori Obat" class="form-control" required>
-                      <?php
+          <!-- <form action='produk/tambahbaru.php' method='POST' enctype="multipart/form-data"> -->
+          <div class="form-group">
+            <div class="input-group input-group-dynamic mb-4 col-xs-2">
+              <label class="form-label">Kode Obat</label>
+              <input type="text" name='idProduk' class="form-control" required>
+            </div>
+            <div class="input-group input-group-dynamic mb-4 col-xs-2">
+              <label class='form-label'>Nama Obat</label>
+              <input type="text" name='nama' class="form-control" required>
+            </div>
+            <div class="input-group input-group-dynamic mb-4 col-xs-2">
+              <!-- <label class="form-label">Kode Tipe Obat</label> -->
+              <select name='idType' placeholder="Kategori Obat" class="form-control" required>
+                <?php
                         $ambilKategori = mysqli_query($conn,"SELECT * FROM typeproduk");
                         while($fetchArray = mysqli_fetch_array($ambilKategori)){
                           $nama = $fetchArray['nama'];
                           $id = $fetchArray['idType'];
                       ?>
 
-                      <option value="<?=$id;?>"><?=$nama?></option>
+                <option value="<?=$id;?>"><?=$nama?></option>
 
-                      <?php
+                <?php
                         }
                       ?>
-                    </select>
-                  </div>
-                  <div class="input-group input-group-dynamic mb-4 col-xs-2">
-                    <label class='form-label'>Harga</label>
-                    <input type="number" name='harga' class="form-control" required>
-                  </div>
-                  <div class="input-group input-group-dynamic mb-4 col-xs-2">
-                    <label class='form-label'>Jumlah Barang</label>
-                    <input type="number" name='stok' class="form-control" required>
-                  </div>
-                  <div class="input-group input-group-dynamic mb-4 col-xs-2">
-                    <!-- <label class='form-label'>Upload Gambar</label> -->
-                    <input type="file" name='gambar' class="form-control" required>
-                  </div>
-                </div>
-                <button type="submit" name="tambah" class="btn btn-danger">Tambah Produk Baru</button>
-              </form>
+              </select>
+            </div>
+            <div class="input-group input-group-dynamic mb-4 col-xs-2">
+              <label class='form-label'>Harga</label>
+              <input type="number" name='harga' class="form-control" required>
+            </div>
+            <div class="input-group input-group-dynamic mb-4 col-xs-2">
+              <label class='form-label'>Jumlah Barang</label>
+              <input type="number" name='stok' class="form-control" required>
+            </div>
+            <div class="input-group input-group-dynamic mb-4 col-xs-2">
+              <!-- <label class='form-label'>Upload Gambar</label> -->
+              <input type="file" name='gambar' class="form-control" required>
+            </div>
+          </div>
+          <!-- <button type="submit" name="tambah" class="btn btn-danger">Tambah Produk Baru</button> -->
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
+            Tambah Produk Baru
+          </button>
+          <!-- </form> -->
 
-              <!-- end form -->
-            <div class="table-responsive">
+          <!-- end form -->
+          <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                      <tr>
-                          <th>ID Produk</th>
-                          <th>ID Kategori</th>
-                          <th>Nama Produk</th>
-                          <th>Harga Produk</th>
-                          <th>Stok</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      <?php
+              <thead>
+                <tr>
+                  <th>ID Produk</th>
+                  <th>ID Kategori</th>
+                  <th>Nama Produk</th>
+                  <th>Harga Produk</th>
+                  <th>Stok</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
                           $ambilProduk = mysqli_query($conn,"SELECT * FROM produk");
                           while($fetchArray = mysqli_fetch_array($ambilProduk)){
                       ?>
-                      <tr>
-                          <td><?= $fetchArray['idProduk'] ?></td>
-                          <td><?= $fetchArray['idType'] ?></td>
-                          <td><?= $fetchArray['nama'] ?></td>
-                          <td><?= $fetchArray['harga'] ?></td>
-                          <td><?= $fetchArray['stok'] ?></td>
-                      </tr>
-                      <?php
+                <tr>
+                  <td><?= $fetchArray['idProduk'] ?></td>
+                  <td><?= $fetchArray['idType'] ?></td>
+                  <td><?= $fetchArray['nama'] ?></td>
+                  <td><?= $fetchArray['harga'] ?></td>
+                  <td><?= $fetchArray['stok'] ?></td>
+                </tr>
+                <?php
                           }
                       ?>
-                  </tbody>
+              </tbody>
 
-              </table>
-            </div>
-        </div>
-      </div>
-    </div>               
-        
-      </div>
-      <footer class="footer py-4  ">
-        <div class="container-fluid">
-          <div class="row align-items-center justify-content-lg-between">
-            <div class="col-lg-6 mb-lg-0 mb-4">
-            </div>
-            <div class="col-lg-6">
-              <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-              </ul>
-            </div>
+            </table>
           </div>
         </div>
-      </footer>
+      </div>
     </div>
-    
+
+    </div>
+    <footer class="footer py-4  ">
+      <div class="container-fluid">
+        <div class="row align-items-center justify-content-lg-between">
+          <div class="col-lg-6 mb-lg-0 mb-4">
+          </div>
+          <div class="col-lg-6">
+            <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+    </div>
+
   </main>
-  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!--   Core JS Files   -->
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap.min.js"></script>
   <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-  
+
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -266,6 +295,15 @@ require 'cekAdmin.php';
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
   <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
   <script src="../assets/js/dataTable.js"></script>
+
+  <!-- jQuery library -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+
+  <!-- Popper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
