@@ -7,7 +7,7 @@ error_reporting(0);
 session_start();
  
 if (isset($_SESSION['nama'])) {
-  header("Location: dashboard.html");
+  header("Location: landing_page.html");
 }
 
 if (isset($_POST['submit'])) {
