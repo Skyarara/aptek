@@ -101,3 +101,19 @@ function updateCartTotal() {
     total = Math.round(total * 100) / 100
     document.getElementsByClassName('cart-total-price')[0].innerText = 'Rp' + total
 }
+
+function search(b) {
+    var filter, target, range, a, i, txtValue;
+    filter = b.value.toUpperCase();
+    target = document.getElementById("shop-items");
+    range = target.getElementsByClassName('shop-item');
+
+    for (i = 0; i < range.length; i++) {
+        txtValue = range[i].getAttribute('data-name');
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            range[i].style.display = "";
+        } else {
+            range[i].style.display = "none";
+        }
+    }
+}
