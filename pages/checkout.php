@@ -86,13 +86,14 @@
 
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Alamat Tujuan Pengiriman</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1" name="alamat"
+                        <input type="text" class="form-control" value='<?= $_SESSION['alamat'] ?>'
+                            id="exampleFormControlInput1" name="alamat"
                             placeholder="Kota, Kecamatan, Jalan, Nomor Rumah" required="required">
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Catatan</label>
-                        <textarea class="form-control" id="exampleFormControlInput1" placeholder="Kirim sebelum hari"
-                            name="catatan"></textarea>
+                        <textarea class="form-control" name='note' id="exampleFormControlInput1"
+                            placeholder="Kirim sebelum hari" name="catatan"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Metode Pembayaran</label>
@@ -136,6 +137,7 @@
                         <div class="display-5">Harga Total</div>
                         <div class="ml-auto d-flex">
                             <div class="font-weight-bold">Rp. <?= number_format($total) ?></div>
+                            <input type="hidden" name="total" value='<?= $total ?>'>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-success btn-lg btn-block mb-3">Konfirmasi Pesanan</button>

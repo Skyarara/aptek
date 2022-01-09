@@ -21,7 +21,6 @@ foreach ($_POST['qty'] as $key => $value) {
 
 $data = $_SESSION['products'];
 
-
 // foreach ($data as $dt) {
     // echo $dt['id'].$dt['nama']."<br>";
 //     foreach($dt as $key => $value) {
@@ -29,6 +28,4 @@ $data = $_SESSION['products'];
 //     }
 // }
 
-// unset($_SESSION["products"]);
-// exit;
 header("Location: ../checkout.php");

@@ -65,7 +65,7 @@
                 <a class="shop-item-id" hidden><?= $data['idProduk'] ?></a>
                 <img class="shop-item-image" src="paracetamol.jpg">
                 <div class="shop-item-details">
-                    <span class="shop-item-price">Rp. <?= number_format($data['harga']) ?></span>
+                    <span class="shop-item-price">Rp<?= $data['harga'] ?></span>
                     <a class="shop-item-real_price" hidden><?= $data['harga'] ?></a>
                     <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
                 </div>
