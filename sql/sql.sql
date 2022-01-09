@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 09, 2022 at 07:45 AM
--- Server version: 10.4.18-MariaDB
--- PHP Version: 8.0.3
+-- Generation Time: Jan 09, 2022 at 10:01 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -36,6 +37,13 @@ CREATE TABLE `customer` (
   `password` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `customer`
+--
+
+INSERT INTO `customer` (`idCustomer`, `nama`, `umur`, `alamat`, `email`, `password`) VALUES
+(2, 'Richard', 19, 'Perum PSI blok bh 3 no 3', '123@gmail.com', '202cb962ac59075b964b07152d234b70');
+
 -- --------------------------------------------------------
 
 --
@@ -47,6 +55,17 @@ CREATE TABLE `detailkeluar` (
   `idProduk` varchar(11) NOT NULL,
   `jumlahBarang` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `detailkeluar`
+--
+
+INSERT INTO `detailkeluar` (`idTransaksiKeluar`, `idProduk`, `jumlahBarang`) VALUES
+(15, 'P01', 2),
+(15, 'P02', 2),
+(15, 'P03', 4),
+(16, 'P01', 2),
+(16, 'P02', 1);
 
 -- --------------------------------------------------------
 
@@ -100,7 +119,9 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`idProduk`, `idType`, `nama`, `harga`, `stok`, `gambar`) VALUES
-('P01', 'K01', 'Paracetamol Indofarma 500 mg 10 Tablet 1 Setrip', 30000, 27, 'paracetamol.jpg');
+('P01', 'K01', 'Paracetamol Indofarma 500 mg 10 Tablet 1 Setrip', 30000, 27, 'paracetamol.jpg'),
+('P02', 'K02', 'vitacimin', 10000, 5, '...'),
+('P03', 'K06', 'Bodrex', 5000, 10, '...');
 
 -- --------------------------------------------------------
 
@@ -132,8 +153,17 @@ CREATE TABLE `transaksikeluar` (
   `idCustomer` int(11) NOT NULL,
   `tanggal` timestamp NOT NULL DEFAULT current_timestamp(),
   `harga_total` int(11) NOT NULL,
-  `catatan` varchar(255) DEFAULT NULL
+  `catatan` varchar(255) DEFAULT NULL,
+  `alamat` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `transaksikeluar`
+--
+
+INSERT INTO `transaksikeluar` (`idTransaksiKeluar`, `idCustomer`, `tanggal`, `harga_total`, `catatan`, `alamat`) VALUES
+(15, 2, '2022-01-08 17:00:00', 100000, 'Besok', ''),
+(16, 2, '2022-01-08 17:00:00', 70000, 'besok', 'Rumah Alvon');
 
 -- --------------------------------------------------------
 
@@ -185,7 +215,7 @@ ALTER TABLE `customer`
 -- Indexes for table `detailkeluar`
 --
 ALTER TABLE `detailkeluar`
-  ADD PRIMARY KEY (`idTransaksiKeluar`,`idProduk`),
+  ADD PRIMARY KEY (`idTransaksiKeluar`,`idProduk`) USING BTREE,
   ADD KEY `detailkeluar_ibfk_2` (`idProduk`);
 
 --
@@ -243,7 +273,7 @@ ALTER TABLE `typeproduk`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `idCustomer` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idCustomer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `loginadmin`
@@ -261,7 +291,7 @@ ALTER TABLE `supplier`
 -- AUTO_INCREMENT for table `transaksikeluar`
 --
 ALTER TABLE `transaksikeluar`
-  MODIFY `idTransaksiKeluar` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idTransaksiKeluar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `transaksimasuk`
@@ -277,8 +307,8 @@ ALTER TABLE `transaksimasuk`
 -- Constraints for table `detailkeluar`
 --
 ALTER TABLE `detailkeluar`
-  ADD CONSTRAINT `detailkeluar_ibfk_1` FOREIGN KEY (`idTransaksiKeluar`) REFERENCES `transaksikeluar` (`idTransaksiKeluar`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `detailkeluar_ibfk_2` FOREIGN KEY (`idProduk`) REFERENCES `produk` (`idProduk`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `detailkeluar_ibfk_2` FOREIGN KEY (`idProduk`) REFERENCES `produk` (`idProduk`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `detailkeluar_ibfk_3` FOREIGN KEY (`idTransaksiKeluar`) REFERENCES `transaksikeluar` (`idTransaksiKeluar`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `detailmasuk`
