@@ -28,11 +28,6 @@ function ready() {
 
 function purchaseClicked() {
     alert('Thank you for your purchase')
-    var cartItems = document.getElementsByClassName('cart-items')[0]
-    while (cartItems.hasChildNodes()) {
-        cartItems.removeChild(cartItems.firstChild)
-    }
-    updateCartTotal()
 }
 
 function removeCartItem(event) {
@@ -54,12 +49,14 @@ function addToCartClicked(event) {
     var shopItem = button.parentElement.parentElement
     var title = shopItem.getElementsByClassName('shop-item-title')[0].innerText
     var price = shopItem.getElementsByClassName('shop-item-price')[0].innerText
+    var real_price = shopItem.getElementsByClassName('shop-item-real_price')[0].innerText
+    var id = shopItem.getElementsByClassName('shop-item-id')[0].innerText
     var imageSrc = shopItem.getElementsByClassName('shop-item-image')[0].src
-    addItemToCart(title, price, imageSrc)
+    addItemToCart(title, price, imageSrc, id, real_price)
     updateCartTotal()
 }
 
-function addItemToCart(title, price, imageSrc) {
+function addItemToCart(title, price, imageSrc, id, real_price) {
     var cartRow = document.createElement('div')
     cartRow.classList.add('cart-row')
     var cartItems = document.getElementsByClassName('cart-items')[0]
@@ -72,12 +69,16 @@ function addItemToCart(title, price, imageSrc) {
     }
     var cartRowContents = `
         <div class="cart-item cart-column">
-            <img class="cart-item-image" src="${imageSrc}" width="100" height="100">
-            <span class="cart-item-title">${title}</span>
+        <img class="cart-item-image" src="${imageSrc}" width="100" height="100">
+        <input type="hidden" name="img[]" value="${imageSrc}"></input>
+        <span class="cart-item-title">${title}</span>
+        <input type="hidden" name="id[]" value="${id}"></input>
+        <input type="hidden" name="nama[]" value="${title}"></input>
         </div>
         <span class="cart-price cart-column">${price}</span>
+        <input type="hidden" name="harga[]" value="${real_price}"></input>
         <div class="cart-quantity cart-column">
-            <input class="cart-quantity-input" type="number" value="1">
+            <input class="cart-quantity-input" type="number" name="qty[]" value="1">
             <button class="btn btn-danger" type="button">REMOVE</button>
         </div>`
     cartRow.innerHTML = cartRowContents

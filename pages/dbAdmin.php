@@ -134,73 +134,22 @@ require 'cekAdmin.php';
           Daftar Produk
         </div>
         <div class="card-body">
-          <!-- form tambah -->
-          <!-- <form action='tambah.php' method='POST'>
-                <div class="form-group row">
-                  <div class="col">
-                    <div class="input-group input-group-dynamic mb-4 col-xs-2">
-                      <label class="form-label">Kode Tipe Obat</label>
-                      <input type="text" name='kode' class="form-control" required>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="input-group input-group-dynamic mb-4 col-xs-2">
-                      <label class='form-label'>Nama Tipe Obat</label>
-                      <input type="text" name='nama' class="form-control" required>
-                    </div>
-                  </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Tambah</button>
-              </form> -->
-
-          <!-- <form action='produk/tambahbaru.php' method='POST' enctype="multipart/form-data"> -->
-          <div class="form-group">
-            <div class="input-group input-group-dynamic mb-4 col-xs-2">
-              <label class="form-label">Kode Obat</label>
-              <input type="text" name='idProduk' class="form-control" required>
-            </div>
-            <div class="input-group input-group-dynamic mb-4 col-xs-2">
-              <label class='form-label'>Nama Obat</label>
-              <input type="text" name='nama' class="form-control" required>
-            </div>
-            <div class="input-group input-group-dynamic mb-4 col-xs-2">
-              <!-- <label class="form-label">Kode Tipe Obat</label> -->
-              <select name='idType' placeholder="Kategori Obat" class="form-control" required>
-                <?php
-                        $ambilKategori = mysqli_query($conn,"SELECT * FROM typeproduk");
-                        while($fetchArray = mysqli_fetch_array($ambilKategori)){
-                          $nama = $fetchArray['nama'];
-                          $id = $fetchArray['idType'];
-                      ?>
-
-                <option value="<?=$id;?>"><?=$nama?></option>
-
-                <?php
-                        }
-                      ?>
-              </select>
-            </div>
-            <div class="input-group input-group-dynamic mb-4 col-xs-2">
-              <label class='form-label'>Harga</label>
-              <input type="number" name='harga' class="form-control" required>
-            </div>
-            <div class="input-group input-group-dynamic mb-4 col-xs-2">
-              <label class='form-label'>Jumlah Barang</label>
-              <input type="number" name='stok' class="form-control" required>
-            </div>
-            <div class="input-group input-group-dynamic mb-4 col-xs-2">
-              <!-- <label class='form-label'>Upload Gambar</label> -->
-              <input type="file" name='gambar' class="form-control" required>
-            </div>
-          </div>
-          <!-- <button type="submit" name="tambah" class="btn btn-danger">Tambah Produk Baru</button> -->
-          <!-- Button trigger modal -->
+          
+          <!-- Button trigger modal tambah baru -->
           <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
             Tambah Produk Baru
           </button>
-          <!-- </form> -->
 
-          <!-- end form -->
+          <!-- Button trigger modal tambah stok-->
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter2">
+            Tambah Stok Produk
+          </button>
+
+          <!-- Button trigger modal hapus produk-->
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter3">
+            Hapus Produk
+          </button>
+
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
@@ -251,24 +200,178 @@ require 'cekAdmin.php';
     </div>
 
   </main>
-  <!-- Modal -->
+  <!-- Modal tambah produk-->
   <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
       <div class="modal-content">
+        <!-- modal header -->
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
         </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
+        
+        <!-- modal body -->
+        <form action='produk/tambahbaru.php' method='POST' enctype="multipart/form-data">
+          <div class="modal-body">
+            <div class="input-group input-group-dynamic mb-4 col-xs-2">
+              <label class="form-label">Kode Obat</label>
+              <input type="text" name='idProduk' class="form-control" required>
+            </div>
+            <div class="input-group input-group-dynamic mb-4 col-xs-2">
+              <label class='form-label'>Nama Obat</label>
+              <input type="text" name='nama' class="form-control" required>
+            </div>                   
+            <div class="input-group input-group-dynamic mb-4 col-xs-2">
+                <!-- <label class="form-label">Kode Tipe Obat</label> -->
+                <select name='idType' placeholder="Kategori Obat" class="form-control" required>
+                  <?php
+                          $ambilKategori = mysqli_query($conn,"SELECT * FROM typeproduk");
+                          while($fetchArray = mysqli_fetch_array($ambilKategori)){
+                            $nama = $fetchArray['nama'];
+                            $id = $fetchArray['idType'];
+                        ?>
+
+                  <option value="<?=$id;?>"><?=$nama?></option>
+
+                  <?php
+                          }
+                        ?>
+                </select>
+            </div>   
+            <div class="input-group input-group-dynamic mb-4 col-xs-2">
+                <label class='form-label'>Harga</label>
+                <input type="number" name='harga' class="form-control" required>
+            </div>
+            <div class="input-group input-group-dynamic mb-4 col-xs-2">
+                <label class='form-label'>Jumlah Barang</label>
+                <input type="number" name='stok' class="form-control" required>
+            </div>
+            <div class="input-group input-group-dynamic mb-4 col-xs-2">
+                <!-- <label class="form-label">Kode Tipe Obat</label> -->
+                <select name='supplier' placeholder="Kategori Obat" class="form-control" required>
+                  <?php
+                          $ambil = mysqli_query($conn,"SELECT * FROM supplier");
+                          while($fetchArray = mysqli_fetch_array($ambil)){
+                            $nama = $fetchArray['nama'];
+                            $id = $fetchArray['idSupplier'];
+                        ?>
+
+                  <option value="<?=$id;?>"><?=$nama?></option>
+
+                  <?php
+                          }
+                        ?>
+                </select>
+            </div>
+            <div class="input-group input-group-dynamic mb-4 col-xs-2">
+                <!-- <label class='form-label'>Upload Gambar</label> -->
+                <input type="file" name='gambar' class="form-control" required>
+            </div>
+          </div>
+
+          <!-- modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+            <button type="submit" name="tambah" class="btn btn-danger">Tambah</button>
+            <button type="submit" name="konfirmasi" class="btn btn-success">Konfirmasi</button>
+          </div>
+
+        </form>
+                       
       </div>
     </div>
   </div>
+   
+  <!-- Modal tambah stok-->
+  <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <!-- modal header -->
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        </div>
+        
+        <!-- modal body -->
+        <form action='produk/tambahstok.php' method='POST'>
+          <div class="modal-body">       
+            <div class="input-group input-group-dynamic mb-4 col-xs-2">
+                <select name='idProduk' placeholder="Nama Obat" class="form-control" required>
+                  <?php
+                          $ambilKategori = mysqli_query($conn,"SELECT * FROM produk");
+                          while($fetchArray = mysqli_fetch_array($ambilKategori)){
+                            $nama = $fetchArray['nama'];
+                            $id = $fetchArray['idProduk'];
+                        ?>
+
+                  <option value="<?=$id;?>"><?=$nama?></option>
+
+                  <?php
+                          }
+                        ?>
+                </select>
+            </div>
+            <div class="input-group input-group-dynamic mb-4 col-xs-2">
+                <label class='form-label'>Jumlah Barang</label>
+                <input type="number" name='stok' class="form-control" required>
+            </div>
+          </div>
+
+          <!-- modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+            <button type="submit" name="tambah" class="btn btn-danger">Tambah Produk Baru</button>
+          </div>
+
+        </form>
+                       
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal hapus produk-->
+  <div class="modal fade" id="exampleModalCenter3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <!-- modal header -->
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        </div>
+        
+        <!-- modal body -->
+        <form action='produk/hapusproduk.php' method='POST'>
+          <div class="modal-body">       
+            <div class="input-group input-group-dynamic mb-4 col-xs-2">
+                <select name='idProduk' placeholder="Kategori Obat" class="form-control" required>
+                  <?php
+                          $ambilKategori = mysqli_query($conn,"SELECT * FROM produk");
+                          while($fetchArray = mysqli_fetch_array($ambilKategori)){
+                            $nama = $fetchArray['nama'];
+                            $id = $fetchArray['idProduk'];
+                        ?>
+
+                  <option value="<?=$id;?>"><?=$nama?></option>
+
+                  <?php
+                          }
+                        ?>
+                </select>
+            </div>
+          </div>
+
+          <!-- modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+            <button type="submit" name="hapus" class="btn btn-danger">Hapus Produk</button>
+          </div>
+
+        </form>
+                       
+      </div>
+    </div>
+  </div>
+
 
   <!--   Core JS Files   -->
   <script src="../assets/js/core/popper.min.js"></script>

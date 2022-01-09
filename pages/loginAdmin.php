@@ -21,9 +21,11 @@ if(isset($_POST['login'])){
   $password = $_POST['password'];
 
   $cekdb = mysqli_query($conn, "SELECT * FROM loginadmin WHERE Email='$email' AND Password='$password'");
+  $row = mysqli_fetch_array($cekdb);
   $count = mysqli_num_rows($cekdb);
 
   if($count>0){
+    $_SESSION['id'] = $row['AdminId'];
     $_SESSION['log'] = 'True';
     header('location:dbAdmin.php');
   }else{

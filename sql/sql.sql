@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 07, 2022 at 03:56 PM
--- Server version: 10.4.18-MariaDB
--- PHP Version: 8.0.3
+-- Generation Time: Jan 09, 2022 at 10:01 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -20,6 +21,63 @@ SET time_zone = "+00:00";
 --
 -- Database: `finprodatabase`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer`
+--
+
+CREATE TABLE `customer` (
+  `idCustomer` int(11) NOT NULL,
+  `nama` varchar(50) NOT NULL,
+  `umur` int(5) NOT NULL,
+  `alamat` varchar(255) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `customer`
+--
+
+INSERT INTO `customer` (`idCustomer`, `nama`, `umur`, `alamat`, `email`, `password`) VALUES
+(2, 'Richard', 19, 'Perum PSI blok bh 3 no 3', '123@gmail.com', '202cb962ac59075b964b07152d234b70');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `detailkeluar`
+--
+
+CREATE TABLE `detailkeluar` (
+  `idTransaksiKeluar` int(11) NOT NULL,
+  `idProduk` varchar(11) NOT NULL,
+  `jumlahBarang` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `detailkeluar`
+--
+
+INSERT INTO `detailkeluar` (`idTransaksiKeluar`, `idProduk`, `jumlahBarang`) VALUES
+(15, 'P01', 2),
+(15, 'P02', 2),
+(15, 'P03', 4),
+(16, 'P01', 2),
+(16, 'P02', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `detailmasuk`
+--
+
+CREATE TABLE `detailmasuk` (
+  `idTransaksiMasuk` int(11) NOT NULL,
+  `idProduk` varchar(11) NOT NULL,
+  `jumlahBarang` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -52,7 +110,72 @@ CREATE TABLE `produk` (
   `idType` varchar(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `harga` int(11) NOT NULL,
-  `stok` int(11) NOT NULL
+  `stok` int(11) NOT NULL,
+  `gambar` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `produk`
+--
+
+INSERT INTO `produk` (`idProduk`, `idType`, `nama`, `harga`, `stok`, `gambar`) VALUES
+('P01', 'K01', 'Paracetamol Indofarma 500 mg 10 Tablet 1 Setrip', 30000, 27, 'paracetamol.jpg'),
+('P02', 'K02', 'vitacimin', 10000, 5, '...'),
+('P03', 'K06', 'Bodrex', 5000, 10, '...');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `supplier`
+--
+
+CREATE TABLE `supplier` (
+  `idSupplier` int(11) NOT NULL,
+  `nama` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `supplier`
+--
+
+INSERT INTO `supplier` (`idSupplier`, `nama`) VALUES
+(2, 'CV. Acep Herbal'),
+(3, 'PT. Jaya Utama Santikah');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transaksikeluar`
+--
+
+CREATE TABLE `transaksikeluar` (
+  `idTransaksiKeluar` int(11) NOT NULL,
+  `idCustomer` int(11) NOT NULL,
+  `tanggal` timestamp NOT NULL DEFAULT current_timestamp(),
+  `harga_total` int(11) NOT NULL,
+  `catatan` varchar(255) DEFAULT NULL,
+  `alamat` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `transaksikeluar`
+--
+
+INSERT INTO `transaksikeluar` (`idTransaksiKeluar`, `idCustomer`, `tanggal`, `harga_total`, `catatan`, `alamat`) VALUES
+(15, 2, '2022-01-08 17:00:00', 100000, 'Besok', ''),
+(16, 2, '2022-01-08 17:00:00', 70000, 'besok', 'Rumah Alvon');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transaksimasuk`
+--
+
+CREATE TABLE `transaksimasuk` (
+  `idTransaksiMasuk` int(11) NOT NULL,
+  `idSupplier` int(11) NOT NULL,
+  `idAdmin` int(11) NOT NULL,
+  `tanggal` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -67,8 +190,40 @@ CREATE TABLE `typeproduk` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Dumping data for table `typeproduk`
+--
+
+INSERT INTO `typeproduk` (`idType`, `nama`) VALUES
+('K01', 'Obat Sakit Kepala'),
+('K02', 'Obat Batuk & Pilek'),
+('K03', 'Obat Demam'),
+('K04', 'Obat Sakit Perut'),
+('K05', 'Obat Oles'),
+('K06', 'Obat Pereda Rasa Sakit');
+
+--
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `customer`
+--
+ALTER TABLE `customer`
+  ADD PRIMARY KEY (`idCustomer`);
+
+--
+-- Indexes for table `detailkeluar`
+--
+ALTER TABLE `detailkeluar`
+  ADD PRIMARY KEY (`idTransaksiKeluar`,`idProduk`) USING BTREE,
+  ADD KEY `detailkeluar_ibfk_2` (`idProduk`);
+
+--
+-- Indexes for table `detailmasuk`
+--
+ALTER TABLE `detailmasuk`
+  ADD PRIMARY KEY (`idTransaksiMasuk`,`idProduk`),
+  ADD KEY `idProduk` (`idProduk`);
 
 --
 -- Indexes for table `loginadmin`
@@ -84,6 +239,27 @@ ALTER TABLE `produk`
   ADD KEY `idType` (`idType`);
 
 --
+-- Indexes for table `supplier`
+--
+ALTER TABLE `supplier`
+  ADD PRIMARY KEY (`idSupplier`);
+
+--
+-- Indexes for table `transaksikeluar`
+--
+ALTER TABLE `transaksikeluar`
+  ADD PRIMARY KEY (`idTransaksiKeluar`),
+  ADD KEY `idCustomer` (`idCustomer`);
+
+--
+-- Indexes for table `transaksimasuk`
+--
+ALTER TABLE `transaksimasuk`
+  ADD PRIMARY KEY (`idTransaksiMasuk`),
+  ADD KEY `idAdmin` (`idAdmin`),
+  ADD KEY `idSupplier` (`idSupplier`);
+
+--
 -- Indexes for table `typeproduk`
 --
 ALTER TABLE `typeproduk`
@@ -94,20 +270,71 @@ ALTER TABLE `typeproduk`
 --
 
 --
+-- AUTO_INCREMENT for table `customer`
+--
+ALTER TABLE `customer`
+  MODIFY `idCustomer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `loginadmin`
 --
 ALTER TABLE `loginadmin`
   MODIFY `AdminId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `supplier`
+--
+ALTER TABLE `supplier`
+  MODIFY `idSupplier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `transaksikeluar`
+--
+ALTER TABLE `transaksikeluar`
+  MODIFY `idTransaksiKeluar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `transaksimasuk`
+--
+ALTER TABLE `transaksimasuk`
+  MODIFY `idTransaksiMasuk` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `detailkeluar`
+--
+ALTER TABLE `detailkeluar`
+  ADD CONSTRAINT `detailkeluar_ibfk_2` FOREIGN KEY (`idProduk`) REFERENCES `produk` (`idProduk`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `detailkeluar_ibfk_3` FOREIGN KEY (`idTransaksiKeluar`) REFERENCES `transaksikeluar` (`idTransaksiKeluar`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `detailmasuk`
+--
+ALTER TABLE `detailmasuk`
+  ADD CONSTRAINT `detailmasuk_ibfk_1` FOREIGN KEY (`idTransaksiMasuk`) REFERENCES `transaksimasuk` (`idTransaksiMasuk`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `detailmasuk_ibfk_2` FOREIGN KEY (`idProduk`) REFERENCES `produk` (`idProduk`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `produk`
 --
 ALTER TABLE `produk`
   ADD CONSTRAINT `produk_ibfk_1` FOREIGN KEY (`idType`) REFERENCES `typeproduk` (`idType`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `transaksikeluar`
+--
+ALTER TABLE `transaksikeluar`
+  ADD CONSTRAINT `transaksikeluar_ibfk_1` FOREIGN KEY (`idCustomer`) REFERENCES `customer` (`idCustomer`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `transaksimasuk`
+--
+ALTER TABLE `transaksimasuk`
+  ADD CONSTRAINT `transaksimasuk_ibfk_1` FOREIGN KEY (`idSupplier`) REFERENCES `supplier` (`idSupplier`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `transaksimasuk_ibfk_2` FOREIGN KEY (`idAdmin`) REFERENCES `loginadmin` (`AdminId`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
