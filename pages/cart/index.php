@@ -62,7 +62,7 @@
             <div class="shop-item" data-name='<?= $data['nama'] ?>'>
                 <span class="shop-item-title"><?= $data['nama'] ?></span>
                 <a class="shop-item-id" hidden><?= $data['idProduk'] ?></a>
-                <img class="shop-item-image" src="paracetamol.jpg">
+                <img class="shop-item-image" src="../produk/image/<?= $data['gambar']?>">
                 <div class="shop-item-details">
                     <span class="shop-item-price">Rp<?= $data['harga'] ?></span>
                     <a class="shop-item-real_price" hidden><?= $data['harga'] ?></a>
