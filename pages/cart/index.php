@@ -62,9 +62,11 @@
             <?php while($data = mysqli_fetch_assoc($query)): ?>
             <div class="shop-item" data-name='<?= $data['nama'] ?>'>
                 <span class="shop-item-title"><?= $data['nama'] ?></span>
+                <a class="shop-item-id" hidden><?= $data['idProduk'] ?></a>
                 <img class="shop-item-image" src="paracetamol.jpg">
                 <div class="shop-item-details">
                     <span class="shop-item-price">Rp. <?= number_format($data['harga']) ?></span>
+                    <a class="shop-item-real_price" hidden><?= $data['harga'] ?></a>
                     <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
                 </div>
             </div>
@@ -78,13 +80,16 @@
             <span class="cart-price cart-header cart-column">PRICE</span>
             <span class="cart-quantity cart-header cart-column">QUANTITY</span>
         </div>
-        <div class="cart-items">
-        </div>
-        <div class="cart-total">
-            <strong class="cart-total-title">Total</strong>
-            <span class="cart-total-price">Rp0</span>
-        </div>
-        <button class="btn btn-primary btn-purchase" type="button">PURCHASE</button>
+        <form action="aksiCheckout.php" method="POST">
+            <div class="cart-items">
+
+            </div>
+            <div class="cart-total">
+                <strong class="cart-total-title">Total</strong>
+                <span class="cart-total-price">Rp0</span>
+            </div>
+            <button class="btn btn-primary btn-purchase" type="submit">PURCHASE</button>
+        </form>
     </section>
 </body>
 

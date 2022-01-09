@@ -42,7 +42,8 @@ if (isset($_POST['submit'])) {
     Login
   </title>
   <!--     Fonts and icons     -->
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+  <link rel="stylesheet" type="text/css"
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
   <!-- Nucleo Icons -->
   <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
   <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
@@ -62,7 +63,8 @@ if (isset($_POST['submit'])) {
     </div>
   </div>
   <main class="main-content  mt-0">
-    <div class="page-header align-items-start min-vh-100" style="background-image: url('../assets/img/background1.jpg')">
+    <div class="page-header align-items-start min-vh-100"
+      style="background-image: url('../assets/img/background1.jpg')">
       <span class="mask bg-gradient-dark opacity-6"></span>
       <div class="container my-auto">
         <div class="row">
@@ -70,7 +72,8 @@ if (isset($_POST['submit'])) {
             <div class="card z-index-0 fadeIn3 fadeInBottom">
               <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                 <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
-                  <img class="logo-hewwodoc" src="/FinproDatabase/assets/img/logo hewodoc.png" style="display: block; width: 30%; margin-left: auto; margin-right: auto;">
+                  <img class="logo-hewwodoc" src="/FinproDatabase/assets/img/logo hewodoc.png"
+                    style="display: block; width: 30%; margin-left: auto; margin-right: auto;">
                   <div class="row mt-3">
                   </div>
                 </div>
@@ -83,14 +86,15 @@ if (isset($_POST['submit'])) {
                   </div>
                   <div class="input-group input-group-outline mb-3">
                     <label class="form-label">Password</label>
-                    <input type="password" class="form-control" name="password" value="<?php echo $_POST['password']; ?>" required>
+                    <input type="password" class="form-control" name="password"
+                      value="<?php echo $_POST['password']; ?>" required>
                   </div>
                   <div class="form-check form-switch d-flex align-items-center mb-3">
                     <input class="form-check-input" type="checkbox" id="rememberMe">
                     <label class="form-check-label mb-0 ms-2" for="rememberMe">Remember me</label>
                   </div>
                   <div class="text-center">
-                    <button type="button" name="submit"class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</button>
+                    <button type="button" name="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</button>
                   </div>
                   <p class="mt-4 text-sm text-center">
                     Don't have an account?
