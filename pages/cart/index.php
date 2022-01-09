@@ -4,7 +4,6 @@
     $query = mysqli_query($conn, $sql);
 ?>
 <!DOCTYPE html>
-<!-- Created By CodingNepal - www.codingnepalweb.com -->
 <html lang="en">
 
 <head>

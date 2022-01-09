@@ -2,14 +2,11 @@
 =========================================================
 * Material Dashboard 2 - v3.0.0
 =========================================================
-
 * Product Page: https://www.creative-tim.com/product/material-dashboard
 * Copyright 2021 Creative Tim (https://www.creative-tim.com)
 * Licensed under MIT (https://www.creative-tim.com/license)
 * Coded by Creative Tim
-
 =========================================================
-
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
 <?php 
@@ -20,25 +17,22 @@ error_reporting(0);
  
 session_start();
  
-if (isset($_SESSION['username'])) {
-    header("Location: sign-in.php");
-}
- 
-if (isset($_POST['submit'])) {
+ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
-    $password = $_POST['password'];
+    $password = md5($_POST['password']);
+    $nama = $_POST['nama'];
+    $umur = $_POST['umur'];
+    $alamat = $_POST['alamat'];
  
     
         $sql = "SELECT * FROM customer WHERE email='$email'";
         $result = mysqli_query($conn, $sql);
-        if (!$result->num_rows > 0) {
-            $sql = "INSERT INTO customer (email, password)
-                    VALUES ('$email', '$password')";
+        if ($result-> num_rows == 0) {
+            $sql = "INSERT INTO customer (nama,umur,alamat,email,password)
+                    VALUES ('$nama','$umur','$alamat','$email', '$password')";
             $result = mysqli_query($conn, $sql);
             if ($result) {
                 echo "<script>alert('Selamat, registrasi berhasil!')</script>";
-                $email = "";
-                $_POST['password'] = "";
             } else {
                 echo "<script>alert('Woops! Terjadi kesalahan.')</script>";
             }
@@ -62,8 +56,7 @@ if (isset($_POST['submit'])) {
     Sign up
   </title>
   <!--     Fonts and icons     -->
-  <link rel="stylesheet" type="text/css"
-    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
   <!-- Nucleo Icons -->
   <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
   <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
@@ -87,11 +80,8 @@ if (isset($_POST['submit'])) {
       <div class="page-header min-vh-100">
         <div class="container">
           <div class="row">
-            <div
-              class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 start-0 text-center justify-content-center flex-column">
-              <div
-                class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center"
-                style="background-image: url('../assets/img/illustrations/Untitled-1.jpg'); background-size: cover;">
+            <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 start-0 text-center justify-content-center flex-column">
+              <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center" style="background-image: url('../assets/img/illustrations/Untitled-1.jpg'); background-size: cover;">
               </div>
             </div>
             <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
@@ -104,16 +94,23 @@ if (isset($_POST['submit'])) {
                   <form role="form" action="" method="POST" class="login-email">
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Nama</label>
-                      <input type="text" class="form-control">
+                      <input type="text" class="form-control" name="nama" required>
+                    </div>
+                    <div class="input-group input-group-outline mb-3">
+                      <label class="form-label">Umur</label>
+                      <input type="number" class="form-control" name="umur" required>
+                    </div>
+                    <div class="input-group input-group-outline mb-3">
+                      <label class="form-label">Alamat</label>
+                      <input type="text" class="form-control" name="alamat" required>
                     </div>
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Email</label>
-                      <input type="email" class="form-control" name="email" value="<?php echo $email; ?>" required>
+                      <input type="email" class="form-control" name="email" required>
                     </div>
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Password</label>
-                      <input type="password" class="form-control" name="password"
-                        value="<?php echo $_POST['password']; ?>" required>
+                      <input type="password" class="form-control" name="password" required>
                     </div>
                     <div class="form-check form-check-info text-start ps-0">
                       <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
@@ -122,15 +119,14 @@ if (isset($_POST['submit'])) {
                       </label>
                     </div>
                     <div class="text-center">
-                      <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0" button
-                        name="submit">Sign Up</button>
+                      <button type="submit" id="submit" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0" name="submit">Sign Up</button>
                     </div>
                   </form>
                 </div>
                 <div class="card-footer text-center pt-0 px-lg-2 px-1">
                   <p class="mb-2 text-sm mx-auto">
                     Sudah terdaftar?
-                    <a href="../pages/sign-in.html" class="text-primary text-gradient font-weight-bold">Sign in</a>
+                    <a href="../pages/sign-in.php" class="text-primary text-gradient font-weight-bold">Sign in</a>
                   </p>
                 </div>
               </div>

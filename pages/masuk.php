@@ -130,66 +130,28 @@ require 'cekAdmin.php';
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Age</th>
-                                                <th>Start date</th>
-                                                <th>Salary</th>
+                                                <th>ID Transaksi</th>
+                                                <th>Nama Obat</th>
+                                                <th>Jumlah</th>
+                                                <th>Supplier</th>
+                                                <th>Admin</th>
                                             </tr>
                                         </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Age</th>
-                                                <th>Start date</th>
-                                                <th>Salary</th>
-                                            </tr>
-                                        </tfoot>
                                         <tbody>
-                                            <tr>
-                                                <td>Tiger Nixon</td>
-                                                <td>System Architect</td>
-                                                <td>Edinburgh</td>
-                                                <td>61</td>
-                                                <td>2011/04/25</td>
-                                                <td>$320,800</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Garrett Winters</td>
-                                                <td>Accountant</td>
-                                                <td>Tokyo</td>
-                                                <td>63</td>
-                                                <td>2011/07/25</td>
-                                                <td>$170,750</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Ashton Cox</td>
-                                                <td>Junior Technical Author</td>
-                                                <td>San Francisco</td>
-                                                <td>66</td>
-                                                <td>2009/01/12</td>
-                                                <td>$86,000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Cedric Kelly</td>
-                                                <td>Senior Javascript Developer</td>
-                                                <td>Edinburgh</td>
-                                                <td>22</td>
-                                                <td>2012/03/29</td>
-                                                <td>$433,060</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Airi Satou</td>
-                                                <td>Accountant</td>
-                                                <td>Tokyo</td>
-                                                <td>33</td>
-                                                <td>2008/11/28</td>
-                                                <td>$162,700</td>
-                                            </tr>
-                                            
+                                          <?php
+                                                    $ambilProduk = mysqli_query($conn,"SELECT tm.idTransaksiMasuk FROM transaksimasuk AS tm INNER JOIN detailmasuk AS dm ON tm.idTransaksiMasuk = dm.idTransaksiMasuk INNER JOIN produk AS p ON dm.idProduk = p.idProduk INNER JOIN supplier AS s ON tm.idSupplier = s.idSupplier INNER JOIN loginadmin AS la ON tm.idAdmin = la.AdminId");
+                                                    while($fetchArray = mysqli_fetch_array($ambilProduk)){
+                                                ?>
+                                          <tr>
+                                            <td><?= $fetchArray['tm.idTransaksiMasuk'] ?></td>
+                                            <td><?= $fetchArray['p.nama'] ?></td>
+                                            <td><?= $fetchArray['dm.jumlah_barang'] ?></td>
+                                            <td><?= $fetchArray['s.nama'] ?></td>
+                                            <td><?= $fetchArray['la.AdminName'] ?></td>
+                                          </tr>
+                                          <?php
+                                                    }
+                                                ?>
                                         </tbody>
                                     </table>
                                 </div>
