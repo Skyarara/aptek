@@ -28,7 +28,7 @@ session_start();
         $sql = "SELECT * FROM customer WHERE email='$email'";
         $result = mysqli_query($conn, $sql);
         if ($result-> num_rows == 0) {
-            $sql = "INSERT INTO customer (nama,umur,alamat,email,password)
+            $sql = "INSERT INTO customer (namaCustomer,umur,alamat,email,password)
                     VALUES ('$nama','$umur','$alamat','$email', '$password')";
             $result = mysqli_query($conn, $sql);
             if ($result) {
