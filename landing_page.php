@@ -21,7 +21,7 @@ session_start();
         <div class="slide-img">
             <img src="../FinproDatabase/assets/img/pusing.png" alt="paracetamol">
             <div class="overlay">
-                <a href="#" class="explore-btn">Telusuri</a>
+                <a href="pages/cart/index.php?jenis=0" class="explore-btn">Telusuri</a>
             </div>
         </div>
 
@@ -36,7 +36,7 @@ session_start();
         <div class="slide-img">
             <img src="../FinproDatabase/assets/img/batuk.jpg" alt="paracetamol">
             <div class="overlay">
-                <a href="#" class="explore-btn">Telusuri</a>
+                <a href="pages/cart/index.php?jenis=1" class="explore-btn">Telusuri</a>
             </div>
         </div>  
 
@@ -51,7 +51,7 @@ session_start();
         <div class="slide-img">
             <img src="../FinproDatabase/assets/img/perut.png" alt="paracetamol">
             <div class="overlay">
-                <a href="#" class="explore-btn">Telusuri</a>
+                <a href="pages/cart/index.php?jenis=2" class="explore-btn">Telusuri</a>
             </div>
         </div>
 
@@ -66,7 +66,7 @@ session_start();
         <div class="slide-img">
             <img src="../FinproDatabase/assets/img/oles.jpg" alt="paracetamol">
             <div class="overlay">
-                <a href="#" class="explore-btn">Telusuri</a>
+                <a href="pages/cart/index.php?jenis=3" class="explore-btn">Telusuri</a>
             </div>
         </div>
 
@@ -81,7 +81,7 @@ session_start();
         <div class="slide-img">
             <img src="../FinproDatabase/assets/img/anak.png" alt="paracetamol">
             <div class="overlay">
-                <a href="#" class="explore-btn">Telusuri</a>
+                <a href="pages/cart/index.php?jenis=4" class="explore-btn">Telusuri</a>
             </div>
         </div>
 
@@ -96,7 +96,7 @@ session_start();
         <div class="slide-img">
             <img src="../FinproDatabase/assets/img/saki.png" alt="paracetamol">
             <div class="overlay">
-                <a href="#" class="explore-btn">Telusuri</a>
+                <a href="pages/cart/index.php?jenis=5" class="explore-btn">Telusuri</a>
             </div>
         </div>
 
