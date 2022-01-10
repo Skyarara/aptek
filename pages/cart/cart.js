@@ -118,3 +118,19 @@ function search(b) {
         }
     }
 }
+
+function kategori(a) {
+    var filter, target, range, a, i, txtValue;
+    filter = a;
+    target = document.getElementById("shop-items");
+    range = target.getElementsByClassName('shop-item');
+
+    for (i = 0; i < range.length; i++) {
+        txtValue = range[i].getAttribute('data-kategori');
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            range[i].style.display = "";
+        } else {
+            range[i].style.display = "none";
+        }
+    }
+}

@@ -1,28 +1,28 @@
 <?php
     require_once '../fungsiadmin.php';
     
-    // Tidak ada kategori
-    if(isset($_GET['jenis']) == NULL){
+    // // Tidak ada kategori
+    // if(isset($_GET['jenis']) == NULL){
         $sql = "SELECT * FROM produk";
-    // Sakit kepala
-    }else if($_GET['jenis'] == 0){
-        $sql = "SELECT * FROM produk WHERE idType = 'K01'";
-    // Batuk pilek
-    }else if($_GET['jenis'] == 1){
-        $sql = "SELECT * FROM produk WHERE idType = 'K02'";            
-    // Sakit Perut
-    }else if($_GET['jenis'] == 2){
-        $sql = "SELECT * FROM produk WHERE idType = 'K03'";
-    // Obat Oles
-    }else if($_GET['jenis'] == 3){
-        $sql = "SELECT * FROM produk WHERE idType = 'K04'";
-    // Obat anak anak
-    }else if($_GET['jenis'] == 4){
-        $sql = "SELECT * FROM produk WHERE idType = 'K05'";
-    //Pereda rasa sakit
-    }else if($_GET['jenis'] == 5){
-        $sql = "SELECT * FROM produk WHERE idType = 'K06'";
-    }
+    // // Sakit kepala
+    // }else if($_GET['jenis'] == 0){
+    //     $sql = "SELECT * FROM produk WHERE idType = 'K01'";
+    // // Batuk pilek
+    // }else if($_GET['jenis'] == 1){
+    //     $sql = "SELECT * FROM produk WHERE idType = 'K02'";            
+    // // Sakit Perut
+    // }else if($_GET['jenis'] == 2){
+    //     $sql = "SELECT * FROM produk WHERE idType = 'K03'";
+    // // Obat Oles
+    // }else if($_GET['jenis'] == 3){
+    //     $sql = "SELECT * FROM produk WHERE idType = 'K04'";
+    // // Obat anak anak
+    // }else if($_GET['jenis'] == 4){
+    //     $sql = "SELECT * FROM produk WHERE idType = 'K05'";
+    // //Pereda rasa sakit
+    // }else if($_GET['jenis'] == 5){
+    //     $sql = "SELECT * FROM produk WHERE idType = 'K06'";
+    // }
     $query = mysqli_query($conn, $sql);
 ?>
 
@@ -57,12 +57,18 @@
                         <input type="checkbox" id="show-features">
                         <label for="show-features">Features</label>
                         <ul>
-                            <li><a href="index.php?jenis=0">Obat Sakit Kepala</a></li>
+                            <!-- <li><a href="index.php?jenis=0">Obat Sakit Kepala</a></li>
                             <li><a href="index.php?jenis=1">Obat Batuk Pilek</a></li>
                             <li><a href="index.php?jenis=2">Obat Sakit Perut</a></li>
                             <li><a href="index.php?jenis=3">Obat Oles</a></li>
                             <li><a href="index.php?jenis=4">Obat Anak - Anak</a></li>
-                            <li><a href="index.php?jenis=5">Obat Pereda rasa sakit</a></li>
+                            <li><a href="index.php?jenis=5">Obat Pereda rasa sakit</a></li> -->
+                            <li onclick="kategori('K01')"><a>Obat Sakit Kepala</a></li>
+                            <li onclick="kategori('K02')"><a>Obat Batuk Pilek</a></li>
+                            <li onclick="kategori('K03')"><a>Obat Sakit Perut</a></li>
+                            <li onclick="kategori('K04')"><a>Obat Oles</a></li>
+                            <li onclick="kategori('K05')"><a>Obat Anak - Anak</a></li>
+                            <li onclick="kategori('K06')"><a>Obat Pereda rasa sakit</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -82,23 +88,23 @@
     ?>
     <section class="container content-section">
         <?php if(!isset($_GET['jenis'])){ ?>
-            <h2 class="section-header">Daftar Obat</h2>
+        <h2 class="section-header">Daftar Obat</h2>
         <?php } else if($id == 0) { ?>
-            <h2 class="section-header">Obat Sakit Kepala</h2>
+        <h2 class="section-header">Obat Sakit Kepala</h2>
         <?php } else if($id == 1) { ?>
-            <h2 class="section-header">Obat Batuk Pilek</h2>
+        <h2 class="section-header">Obat Batuk Pilek</h2>
         <?php } else if($id == 2) { ?>
-            <h2 class="section-header">Obat Sakit Perut</h2>
+        <h2 class="section-header">Obat Sakit Perut</h2>
         <?php } else if($id == 3) { ?>
-            <h2 class="section-header">Obat Oles</h2>
+        <h2 class="section-header">Obat Oles</h2>
         <?php } else if($id == 4) { ?>
-            <h2 class="section-header">Obat Anak - Anak</h2>
+        <h2 class="section-header">Obat Anak - Anak</h2>
         <?php } else if($id == 5) { ?>
-            <h2 class="section-header">Obat Pereda Rasa Sakit</h2>
+        <h2 class="section-header">Obat Pereda Rasa Sakit</h2>
         <?php } ?>
         <div class="shop-items" id='shop-items'>
             <?php while($data = mysqli_fetch_assoc($query)): ?>
-            <div class="shop-item" data-name='<?= $data['nama'] ?>'>
+            <div class="shop-item" data-name='<?= $data['nama'] ?>' data-kategori='<?= $data['idType'] ?>'>
                 <span class="shop-item-title"><?= $data['nama'] ?></span>
                 <a class="shop-item-id" hidden><?= $data['idProduk'] ?></a>
                 <img class="shop-item-image" src="../produk/image/<?= $data['gambar']?>">

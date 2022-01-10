@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 09, 2022 at 10:01 AM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.2
+-- Generation Time: Jan 10, 2022 at 10:49 AM
+-- Server version: 10.4.18-MariaDB
+-- PHP Version: 8.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -30,9 +29,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `customer` (
   `idCustomer` int(11) NOT NULL,
-  `nama` varchar(50) NOT NULL,
+  `namaCustomer` varchar(50) NOT NULL,
   `umur` int(5) NOT NULL,
-  `alamat` varchar(255) NOT NULL,
+  `alamat` varchar(255) DEFAULT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -41,8 +40,8 @@ CREATE TABLE `customer` (
 -- Dumping data for table `customer`
 --
 
-INSERT INTO `customer` (`idCustomer`, `nama`, `umur`, `alamat`, `email`, `password`) VALUES
-(2, 'Richard', 19, 'Perum PSI blok bh 3 no 3', '123@gmail.com', '202cb962ac59075b964b07152d234b70');
+INSERT INTO `customer` (`idCustomer`, `namaCustomer`, `umur`, `alamat`, `email`, `password`) VALUES
+(1, 'bam', 9, 'Jalan pattimura', 'bam@gmail.com', 'e5bea9a864d5b94d76ebdaaf43d66f4d');
 
 -- --------------------------------------------------------
 
@@ -61,11 +60,9 @@ CREATE TABLE `detailkeluar` (
 --
 
 INSERT INTO `detailkeluar` (`idTransaksiKeluar`, `idProduk`, `jumlahBarang`) VALUES
-(15, 'P01', 2),
-(15, 'P02', 2),
-(15, 'P03', 4),
-(16, 'P01', 2),
-(16, 'P02', 1);
+(4, 'P01', 1),
+(5, 'P01', 1),
+(5, 'P03', 1);
 
 -- --------------------------------------------------------
 
@@ -78,6 +75,24 @@ CREATE TABLE `detailmasuk` (
   `idProduk` varchar(11) NOT NULL,
   `jumlahBarang` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `detailmasuk`
+--
+
+INSERT INTO `detailmasuk` (`idTransaksiMasuk`, `idProduk`, `jumlahBarang`) VALUES
+(1, 'P01', 27),
+(7, 'P01', 5),
+(9, 'P03', 50),
+(10, 'P04', 55),
+(11, 'P02', 5),
+(11, 'P03', 5),
+(12, 'P01', 20),
+(13, 'P02', 3),
+(14, 'P01', 2),
+(15, 'P01', 1),
+(16, 'P01', 2),
+(17, 'P01', 2);
 
 -- --------------------------------------------------------
 
@@ -119,9 +134,10 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`idProduk`, `idType`, `nama`, `harga`, `stok`, `gambar`) VALUES
-('P01', 'K01', 'Paracetamol Indofarma 500 mg 10 Tablet 1 Setrip', 30000, 27, 'paracetamol.jpg'),
-('P02', 'K02', 'vitacimin', 10000, 5, '...'),
-('P03', 'K06', 'Bodrex', 5000, 10, '...');
+('P01', 'K01', 'Paracetamol Indofarma 500 mg 10 Tablet 1 Setrip', 30000, 95, 'paracetamol.jpg'),
+('P02', 'K01', 'Bodrex', 2323, 240, 'bodrex extra.jpg'),
+('P03', 'K04', 'Entrostop', 15000, 55, 'cdac536ee91c4e7d3d1c54a850140360.jpg'),
+('P04', 'K04', 'Promag', 20000, 55, '31624416_30644347-c14c-431f-8d1d-52697aae1b5c_780_780.jpg');
 
 -- --------------------------------------------------------
 
@@ -131,14 +147,14 @@ INSERT INTO `produk` (`idProduk`, `idType`, `nama`, `harga`, `stok`, `gambar`) V
 
 CREATE TABLE `supplier` (
   `idSupplier` int(11) NOT NULL,
-  `nama` varchar(50) NOT NULL
+  `namaSupplier` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `supplier`
 --
 
-INSERT INTO `supplier` (`idSupplier`, `nama`) VALUES
+INSERT INTO `supplier` (`idSupplier`, `namaSupplier`) VALUES
 (2, 'CV. Acep Herbal'),
 (3, 'PT. Jaya Utama Santikah');
 
@@ -162,8 +178,8 @@ CREATE TABLE `transaksikeluar` (
 --
 
 INSERT INTO `transaksikeluar` (`idTransaksiKeluar`, `idCustomer`, `tanggal`, `harga_total`, `catatan`, `alamat`) VALUES
-(15, 2, '2022-01-08 17:00:00', 100000, 'Besok', ''),
-(16, 2, '2022-01-08 17:00:00', 70000, 'besok', 'Rumah Alvon');
+(4, 1, '2022-01-08 17:00:00', 54000, 'tolong kirim secepatnya', 'Jalan pattimura'),
+(5, 1, '2022-01-09 17:00:00', 45000, '', 'Jalan pattimura');
 
 -- --------------------------------------------------------
 
@@ -177,6 +193,29 @@ CREATE TABLE `transaksimasuk` (
   `idAdmin` int(11) NOT NULL,
   `tanggal` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `transaksimasuk`
+--
+
+INSERT INTO `transaksimasuk` (`idTransaksiMasuk`, `idSupplier`, `idAdmin`, `tanggal`) VALUES
+(1, 2, 1, '2022-01-09 07:19:16'),
+(2, 2, 1, '2022-01-09 13:14:40'),
+(3, 2, 1, '2022-01-10 03:53:26'),
+(4, 2, 1, '2022-01-10 03:55:00'),
+(5, 2, 1, '2022-01-10 03:55:45'),
+(6, 2, 1, '2022-01-10 03:56:21'),
+(7, 2, 1, '2022-01-10 03:56:34'),
+(8, 2, 1, '2022-01-10 03:59:03'),
+(9, 2, 1, '2022-01-10 03:59:18'),
+(10, 2, 1, '2022-01-10 04:00:58'),
+(11, 2, 1, '2022-01-10 04:08:04'),
+(12, 3, 1, '2022-01-10 04:14:30'),
+(13, 2, 1, '2022-01-10 04:41:36'),
+(14, 2, 1, '2022-01-10 04:45:50'),
+(15, 2, 1, '2022-01-10 05:05:51'),
+(16, 2, 1, '2022-01-10 05:07:20'),
+(17, 2, 1, '2022-01-10 05:09:24');
 
 -- --------------------------------------------------------
 
@@ -196,9 +235,9 @@ CREATE TABLE `typeproduk` (
 INSERT INTO `typeproduk` (`idType`, `nama`) VALUES
 ('K01', 'Obat Sakit Kepala'),
 ('K02', 'Obat Batuk & Pilek'),
-('K03', 'Obat Demam'),
-('K04', 'Obat Sakit Perut'),
-('K05', 'Obat Oles'),
+('K03', 'Obat Sakit Perut'),
+('K04', 'Obat Oles'),
+('K05', 'Obat Anak - Anak'),
 ('K06', 'Obat Pereda Rasa Sakit');
 
 --
@@ -215,7 +254,7 @@ ALTER TABLE `customer`
 -- Indexes for table `detailkeluar`
 --
 ALTER TABLE `detailkeluar`
-  ADD PRIMARY KEY (`idTransaksiKeluar`,`idProduk`) USING BTREE,
+  ADD PRIMARY KEY (`idTransaksiKeluar`,`idProduk`),
   ADD KEY `detailkeluar_ibfk_2` (`idProduk`);
 
 --
@@ -273,7 +312,7 @@ ALTER TABLE `typeproduk`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `idCustomer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idCustomer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `loginadmin`
@@ -291,13 +330,13 @@ ALTER TABLE `supplier`
 -- AUTO_INCREMENT for table `transaksikeluar`
 --
 ALTER TABLE `transaksikeluar`
-  MODIFY `idTransaksiKeluar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `idTransaksiKeluar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `transaksimasuk`
 --
 ALTER TABLE `transaksimasuk`
-  MODIFY `idTransaksiMasuk` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idTransaksiMasuk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Constraints for dumped tables
@@ -307,8 +346,8 @@ ALTER TABLE `transaksimasuk`
 -- Constraints for table `detailkeluar`
 --
 ALTER TABLE `detailkeluar`
-  ADD CONSTRAINT `detailkeluar_ibfk_2` FOREIGN KEY (`idProduk`) REFERENCES `produk` (`idProduk`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `detailkeluar_ibfk_3` FOREIGN KEY (`idTransaksiKeluar`) REFERENCES `transaksikeluar` (`idTransaksiKeluar`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `detailkeluar_ibfk_1` FOREIGN KEY (`idTransaksiKeluar`) REFERENCES `transaksikeluar` (`idTransaksiKeluar`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `detailkeluar_ibfk_2` FOREIGN KEY (`idProduk`) REFERENCES `produk` (`idProduk`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `detailmasuk`
