@@ -18,18 +18,15 @@ if (isset($_POST['submit'])) {
     $result = mysqli_query($conn, $sql);
     if ($result->num_rows > 0) {
         $row = mysqli_fetch_assoc($result);
-        $_SESSION['nama'] = $row['nama'];
+        $_SESSION['nama'] = $row['namaCustomer'];
         $_SESSION['id_user'] = $row['idCustomer'];
         $_SESSION['alamat'] = $row['alamat'];
-        header("Location: ../landing_page.php");
+        header("Location: cart/index.php");
     } else {
         echo "<script>alert('Email atau password Anda salah. Silahkan coba lagi!')</script>";
     }
 }
-
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
