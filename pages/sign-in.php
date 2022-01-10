@@ -101,6 +101,9 @@ if (isset($_POST['submit'])) {
                     Don't have an account?
                     <a href="../pages/sign-up.php" class="text-primary text-gradient font-weight-bold">Sign up</a>
                   </p>
+                  <p class="text-sm text-center">
+                    <a href="dbAdmin.php" class="text-primary text-gradient font-weight-bold">Login as Admin</a>
+                  </p>
                 </form>
               </div>
             </div>
