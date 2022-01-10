@@ -21,9 +21,11 @@ if(isset($_POST['login'])){
   $password = $_POST['password'];
 
   $cekdb = mysqli_query($conn, "SELECT * FROM loginadmin WHERE Email='$email' AND Password='$password'");
+  $row = mysqli_fetch_array($cekdb);
   $count = mysqli_num_rows($cekdb);
 
   if($count>0){
+    $_SESSION['id'] = $row['AdminId'];
     $_SESSION['log'] = 'True';
     header('location:dbAdmin.php');
   }else{
@@ -98,8 +100,17 @@ if(!isset($_SESSION['log'])){
                     <input class="form-check-input" type="checkbox" id="rememberMe">
                     <label class="form-check-label mb-0 ms-2" for="rememberMe">Remember me</label>
                   </div> -->
-                  <div class="text-center">
-                    <button name="login" class="btn bg-gradient-dark w-100 my-4 mb-2">Sign in</button>
+                  <div class="row">
+                    <div class="col">
+                      <div class="text-center">
+                        <button name="login" class="btn bg-gradient-dark w-100">Masuk</button>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="text-center">
+                        <a href="sign-in.php" class="btn bg-gradient-warning w-100">Kembali</a>
+                      </div>
+                    </div>
                   </div>
                 </form>
               </div>

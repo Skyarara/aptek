@@ -119,99 +119,59 @@ require 'cekAdmin.php';
     </nav>
     <!-- End Navbar -->
     <div class="container-fluid py-4">
-      
-        <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-table mr-1"></i>
-                                Transaksi Masuk
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Age</th>
-                                                <th>Start date</th>
-                                                <th>Salary</th>
-                                            </tr>
-                                        </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Age</th>
-                                                <th>Start date</th>
-                                                <th>Salary</th>
-                                            </tr>
-                                        </tfoot>
-                                        <tbody>
-                                            <tr>
-                                                <td>Tiger Nixon</td>
-                                                <td>System Architect</td>
-                                                <td>Edinburgh</td>
-                                                <td>61</td>
-                                                <td>2011/04/25</td>
-                                                <td>$320,800</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Garrett Winters</td>
-                                                <td>Accountant</td>
-                                                <td>Tokyo</td>
-                                                <td>63</td>
-                                                <td>2011/07/25</td>
-                                                <td>$170,750</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Ashton Cox</td>
-                                                <td>Junior Technical Author</td>
-                                                <td>San Francisco</td>
-                                                <td>66</td>
-                                                <td>2009/01/12</td>
-                                                <td>$86,000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Cedric Kelly</td>
-                                                <td>Senior Javascript Developer</td>
-                                                <td>Edinburgh</td>
-                                                <td>22</td>
-                                                <td>2012/03/29</td>
-                                                <td>$433,060</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Airi Satou</td>
-                                                <td>Accountant</td>
-                                                <td>Tokyo</td>
-                                                <td>33</td>
-                                                <td>2008/11/28</td>
-                                                <td>$162,700</td>
-                                            </tr>
-                                            
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-        
+      <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table mr-1"></i>
+            Transaksi Masuk
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>ID Transaksi</th>
+                  <th>Nama Admin</th>
+                  <th>Nama Supplier</th>
+                  <th>Nama Obat</th>
+                  <th>Jumlah</th>
+                  <th>Tanggal</th>
+                </tr>
+              </thead>
+            <tbody>
+              <?php
+                $ambilProduk = mysqli_query($conn,"SELECT * FROM transaksimasuk tm, detailmasuk dm, supplier s, loginadmin la, produk p WHERE tm.idTransaksiMasuk = dm.idTransaksiMasuk AND tm.idSupplier = s.idSupplier AND tm.idAdmin = la.AdminId AND dm.idProduk = p.idProduk");
+                while($fetchArray = mysqli_fetch_array($ambilProduk)){
+              ?>
+              <tr>
+                <td><?= $fetchArray['idTransaksiMasuk'] ?></td>
+                <td><?= $fetchArray['AdminName'] ?></td>
+                <td><?= $fetchArray['namaSupplier'] ?></td>
+                <td><?= $fetchArray['nama'] ?></td>
+                <td><?= $fetchArray['jumlahBarang'] ?></td>
+                <td><?= $fetchArray['tanggal'] ?></td>
+              </tr>
+              <?php
+                }
+              ?>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <footer class="footer py-4  ">
-        <div class="container-fluid">
-          <div class="row align-items-center justify-content-lg-between">
-            <div class="col-lg-6 mb-lg-0 mb-4">
-            </div>
-            <div class="col-lg-6">
-              <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-              </ul>
-            </div>
+    </div>
+    <footer class="footer py-4  ">
+      <div class="container-fluid">
+        <div class="row align-items-center justify-content-lg-between">
+          <div class="col-lg-6 mb-lg-0 mb-4">
+          </div>
+          <div class="col-lg-6">
+            <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+            </ul>
           </div>
         </div>
-      </footer>
-    </div>
+      </div>
+    </footer>
+
   </main>
-  
   <!--   Core JS Files   -->
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap.min.js"></script>

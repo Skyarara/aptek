@@ -19,7 +19,9 @@ if (isset($_POST['submit'])) {
     if ($result->num_rows > 0) {
         $row = mysqli_fetch_assoc($result);
         $_SESSION['nama'] = $row['nama'];
-        header("Location: ../landing_page.php");
+        $_SESSION['id_user'] = $row['idCustomer'];
+        $_SESSION['alamat'] = $row['alamat'];
+        header("Location: cart/index.php");
     } else {
         echo "<script>alert('Email atau password Anda salah. Silahkan coba lagi!')</script>";
     }
@@ -41,7 +43,8 @@ if (isset($_POST['submit'])) {
     Login
   </title>
   <!--     Fonts and icons     -->
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+  <link rel="stylesheet" type="text/css"
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
   <!-- Nucleo Icons -->
   <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
   <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
@@ -61,7 +64,8 @@ if (isset($_POST['submit'])) {
     </div>
   </div>
   <main class="main-content  mt-0">
-    <div class="page-header align-items-start min-vh-100" style="background-image: url('../assets/img/background1.jpg')">
+    <div class="page-header align-items-start min-vh-100"
+      style="background-image: url('../assets/img/background1.jpg')">
       <span class="mask bg-gradient-dark opacity-6"></span>
       <div class="container my-auto">
         <div class="row">
@@ -69,7 +73,8 @@ if (isset($_POST['submit'])) {
             <div class="card z-index-0 fadeIn3 fadeInBottom">
               <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                 <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
-                  <img class="logo-hewwodoc" src="/FinproDatabase/assets/img/logo hewodoc.png" style="display: block; width: 30%; margin-left: auto; margin-right: auto;">
+                  <img class="logo-hewwodoc" src="../assets/img/logo hewodoc.png"
+                    style="display: block; width: 30%; margin-left: auto; margin-right: auto;">
                   <div class="row mt-3">
                   </div>
                 </div>
@@ -89,11 +94,15 @@ if (isset($_POST['submit'])) {
                     <label class="form-check-label mb-0 ms-2" for="rememberMe">Remember me</label>
                   </div>
                   <div class="text-center">
-                    <button type="submit" id="submit" name="submit" value="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</button>
+                    <button type="submit" id="submit" name="submit" value="submit"
+                      class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</button>
                   </div>
                   <p class="mt-4 text-sm text-center">
                     Don't have an account?
                     <a href="../pages/sign-up.php" class="text-primary text-gradient font-weight-bold">Sign up</a>
+                  </p>
+                  <p class="text-sm text-center">
+                    <a href="dbAdmin.php" class="text-primary text-gradient font-weight-bold">Login as Admin</a>
                   </p>
                 </form>
               </div>

@@ -4,7 +4,6 @@
     $query = mysqli_query($conn, $sql);
 ?>
 <!DOCTYPE html>
-<!-- Created By CodingNepal - www.codingnepalweb.com -->
 <html lang="en">
 
 <head>
@@ -36,11 +35,11 @@
                         <label for="show-features">Features</label>
                         <ul>
                             <li><a href="#">Obat Sakit Kepala</a></li>
-                            <li><a href="#">Obat Sakit Kepala</a></li>
-                            <li><a href="#">Obat Sakit Kepala</a></li>
-                            <li><a href="#">Obat Sakit Kepala</a></li>
-                            <li><a href="#">Obat Sakit Kepala</a></li>
-                            <li><a href="#">Obat Sakit Kepala</a></li>
+                            <li><a href="#">Obat Batuk Pilek</a></li>
+                            <li><a href="#">Obat Sakit Perut</a></li>
+                            <li><a href="#">Obat Oles</a></li>
+                            <li><a href="#">Obat Anak - Anak</a></li>
+                            <li><a href="#">Obat Pereda rasa sakit</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -62,9 +61,11 @@
             <?php while($data = mysqli_fetch_assoc($query)): ?>
             <div class="shop-item" data-name='<?= $data['nama'] ?>'>
                 <span class="shop-item-title"><?= $data['nama'] ?></span>
-                <img class="shop-item-image" src="paracetamol.jpg">
+                <a class="shop-item-id" hidden><?= $data['idProduk'] ?></a>
+                <img class="shop-item-image" src="../produk/image/<?= $data['gambar']?>">
                 <div class="shop-item-details">
-                    <span class="shop-item-price">Rp. <?= number_format($data['harga']) ?></span>
+                    <span class="shop-item-price">Rp<?= $data['harga'] ?></span>
+                    <a class="shop-item-real_price" hidden><?= $data['harga'] ?></a>
                     <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
                 </div>
             </div>
@@ -78,13 +79,16 @@
             <span class="cart-price cart-header cart-column">PRICE</span>
             <span class="cart-quantity cart-header cart-column">QUANTITY</span>
         </div>
-        <div class="cart-items">
-        </div>
-        <div class="cart-total">
-            <strong class="cart-total-title">Total</strong>
-            <span class="cart-total-price">Rp0</span>
-        </div>
-        <button class="btn btn-primary btn-purchase" type="button">PURCHASE</button>
+        <form action="aksiCheckout.php" method="POST">
+            <div class="cart-items">
+
+            </div>
+            <div class="cart-total">
+                <strong class="cart-total-title">Total</strong>
+                <span class="cart-total-price">Rp0</span>
+            </div>
+            <button class="btn btn-primary btn-purchase" type="submit">PURCHASE</button>
+        </form>
     </section>
 </body>
 

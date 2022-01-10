@@ -118,98 +118,61 @@ require 'cekAdmin.php';
       </div>
     </nav>
     <!-- End Navbar -->
-    <div class="container-fluid py-4">
-      
-        <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-table mr-1"></i>
-                                Transaksi Keluar
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Age</th>
-                                                <th>Start date</th>
-                                                <th>Salary</th>
-                                            </tr>
-                                        </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Age</th>
-                                                <th>Start date</th>
-                                                <th>Salary</th>
-                                            </tr>
-                                        </tfoot>
-                                        <tbody>
-                                            <tr>
-                                                <td>Tiger Nixon</td>
-                                                <td>System Architect</td>
-                                                <td>Edinburgh</td>
-                                                <td>61</td>
-                                                <td>2011/04/25</td>
-                                                <td>$320,800</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Garrett Winters</td>
-                                                <td>Accountant</td>
-                                                <td>Tokyo</td>
-                                                <td>63</td>
-                                                <td>2011/07/25</td>
-                                                <td>$170,750</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Ashton Cox</td>
-                                                <td>Junior Technical Author</td>
-                                                <td>San Francisco</td>
-                                                <td>66</td>
-                                                <td>2009/01/12</td>
-                                                <td>$86,000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Cedric Kelly</td>
-                                                <td>Senior Javascript Developer</td>
-                                                <td>Edinburgh</td>
-                                                <td>22</td>
-                                                <td>2012/03/29</td>
-                                                <td>$433,060</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Airi Satou</td>
-                                                <td>Accountant</td>
-                                                <td>Tokyo</td>
-                                                <td>33</td>
-                                                <td>2008/11/28</td>
-                                                <td>$162,700</td>
-                                            </tr>
-                                            
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-        
+    <div class="container-fluid py-4"> 
+      <div class="card mb-4">
+        <div class="card-header">
+          <i class="fas fa-table mr-1"></i>
+          Transaksi Keluar
+        </div>
+
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>ID Transaksi</th>
+                  <th>Nama Customer</th>
+                  <th>Nama Obat</th>
+                  <th>Harga Total</th>
+                  <th>Alamat</th>
+                  <th>Tanggal Transaksi</th>
+                  <th>Catatan Pesanan</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                $ambilProduk = mysqli_query($conn,"SELECT * FROM transaksikeluar tk, detailkeluar dk, customer c, produk p WHERE tk.idTransaksiKeluar = dk.idTransaksiKeluar AND tk.idCustomer = c.idCustomer AND dk.idProduk = p.idProduk");
+                while($fetchArray = mysqli_fetch_array($ambilProduk)){
+                ?>
+                <tr>
+                  <td><?= $fetchArray['idTransaksiKeluar'] ?></td>
+                  <td><?= $fetchArray['namaCustomer'] ?></td>
+                  <td><?= $fetchArray['nama'] ?></td>
+                  <td><?= $fetchArray['harga_total'] ?></td>
+                  <td><?= $fetchArray['alamat'] ?></td>
+                  <td><?= $fetchArray['tanggal'] ?></td>
+                  <td><?= $fetchArray['catatan'] ?></td>
+                </tr>
+                <?php
+                  }
+                ?>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
-      <footer class="footer py-4  ">
+    </div>
+    <footer class="footer py-4  ">
         <div class="container-fluid">
           <div class="row align-items-center justify-content-lg-between">
             <div class="col-lg-6 mb-lg-0 mb-4">
             </div>
-            <div class="col-lg-6">
-              <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-              </ul>
-            </div>
+          <div class="col-lg-6">
+            <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+            </ul>
           </div>
         </div>
-      </footer>
-    </div>
+    </footer>
   </main>
   
   <!--   Core JS Files   -->
