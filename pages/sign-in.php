@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['nama'] = $row['nama'];
         $_SESSION['id_user'] = $row['idCustomer'];
         $_SESSION['alamat'] = $row['alamat'];
-        header("Location: cart/index.php");
+        header("Location: ../landing_page.php");
     } else {
         echo "<script>alert('Email atau password Anda salah. Silahkan coba lagi!')</script>";
     }

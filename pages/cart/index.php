@@ -27,7 +27,7 @@
             <div class="content">
                 <div class="logo"><a href="#"><img src="../../logo_hewodoc.png" alt=""></a></div>
                 <ul class="links">
-                    <li><a href="#">Home</a></li>
+                    <li><a href="../../landing_page.php">Home</a></li>
                     <li><a href="#">About</a></li>
                     <li>
                         <a href="#" class="desktop-link">Category</a>
@@ -49,7 +49,7 @@
                     </table>
                 </div>
                 <div class="feature">
-                    <a href="#">Login/Register</a>
+                    <a href="../logout.php">Logout</a>
                 </div>
             </div>
         </nav>
