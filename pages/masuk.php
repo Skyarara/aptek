@@ -119,61 +119,59 @@ require 'cekAdmin.php';
     </nav>
     <!-- End Navbar -->
     <div class="container-fluid py-4">
-      
-        <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-table mr-1"></i>
-                                Transaksi Masuk
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th>ID Transaksi</th>
-                                                <th>Nama Obat</th>
-                                                <th>Jumlah</th>
-                                                <th>Supplier</th>
-                                                <th>Admin</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                          <?php
-                                                    $ambilProduk = mysqli_query($conn,"SELECT tm.idTransaksiMasuk FROM transaksimasuk AS tm INNER JOIN detailmasuk AS dm ON tm.idTransaksiMasuk = dm.idTransaksiMasuk INNER JOIN produk AS p ON dm.idProduk = p.idProduk INNER JOIN supplier AS s ON tm.idSupplier = s.idSupplier INNER JOIN loginadmin AS la ON tm.idAdmin = la.AdminId");
-                                                    while($fetchArray = mysqli_fetch_array($ambilProduk)){
-                                                ?>
-                                          <tr>
-                                            <td><?= $fetchArray['tm.idTransaksiMasuk'] ?></td>
-                                            <td><?= $fetchArray['p.nama'] ?></td>
-                                            <td><?= $fetchArray['dm.jumlah_barang'] ?></td>
-                                            <td><?= $fetchArray['s.nama'] ?></td>
-                                            <td><?= $fetchArray['la.AdminName'] ?></td>
-                                          </tr>
-                                          <?php
-                                                    }
-                                                ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-        
+      <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table mr-1"></i>
+            Transaksi Masuk
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>ID Transaksi</th>
+                  <th>Nama Admin</th>
+                  <th>Nama Supplier</th>
+                  <th>Nama Obat</th>
+                  <th>Jumlah</th>
+                  <th>Tanggal</th>
+                </tr>
+              </thead>
+            <tbody>
+              <?php
+                $ambilProduk = mysqli_query($conn,"SELECT * FROM transaksimasuk tm, detailmasuk dm, supplier s, loginadmin la, produk p WHERE tm.idTransaksiMasuk = dm.idTransaksiMasuk AND tm.idSupplier = s.idSupplier AND tm.idAdmin = la.AdminId AND dm.idProduk = p.idProduk");
+                while($fetchArray = mysqli_fetch_array($ambilProduk)){
+              ?>
+              <tr>
+                <td><?= $fetchArray['idTransaksiMasuk'] ?></td>
+                <td><?= $fetchArray['AdminName'] ?></td>
+                <td><?= $fetchArray['namaSupplier'] ?></td>
+                <td><?= $fetchArray['nama'] ?></td>
+                <td><?= $fetchArray['jumlahBarang'] ?></td>
+                <td><?= $fetchArray['tanggal'] ?></td>
+              </tr>
+              <?php
+                }
+              ?>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <footer class="footer py-4  ">
-        <div class="container-fluid">
-          <div class="row align-items-center justify-content-lg-between">
-            <div class="col-lg-6 mb-lg-0 mb-4">
-            </div>
-            <div class="col-lg-6">
-              <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-              </ul>
-            </div>
+    </div>
+    <footer class="footer py-4  ">
+      <div class="container-fluid">
+        <div class="row align-items-center justify-content-lg-between">
+          <div class="col-lg-6 mb-lg-0 mb-4">
+          </div>
+          <div class="col-lg-6">
+            <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+            </ul>
           </div>
         </div>
-      </footer>
-    </div>
+      </div>
+    </footer>
+
   </main>
-  
   <!--   Core JS Files   -->
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap.min.js"></script>

@@ -1,7 +1,7 @@
 <?php
+session_start();
 
-if(isset($_POST['konfirmasi'])){
-    
-}
+unset($_SESSION['idtransaksi']);
+header('location: ../dbAdmin.php');
 
 ?>

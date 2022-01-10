@@ -18,9 +18,23 @@ require '../fungsiadmin.php';
         $stoksekarang = $ambil['stok'];
         $tambahstok = $stoksekarang + $jumlah;
 
-        $updatestok = mysqli_query($conn, "UPDATE produk SET stok='$tambahstok' WHERE idProduk='$kodeproduk'");
+        $supplier = $_POST['supplier'];
+        $idAdmin = $_SESSION['id'];
 
-        if ($updatestok)  {
+        $updatestok = mysqli_query($conn, "UPDATE produk SET stok='$tambahstok' WHERE idProduk='$kodeproduk'");
+        if(!isset($_SESSION['idtransaksi'])){
+          $transmasuk = mysqli_query($conn,"INSERT INTO transaksimasuk (idTransaksiMasuk, idSupplier, idAdmin) VALUES('','$supplier','$idAdmin' )");
+          $idmasuk = mysqli_insert_id($conn);
+          $_SESSION['idtransaksi'] = $idmasuk;
+        }
+        
+        $idmasuk = $_SESSION['idtransaksi'];
+        
+        $detailmasuk = mysqli_query($conn,"INSERT INTO detailmasuk (idTransaksiMasuk, idProduk, jumlahBarang) VALUES('$idmasuk', '$kodeproduk','$jumlah')");
+
+
+
+        if ($detailmasuk)  {
           echo "<script type='text/javascript'>
           alert('data berhasil ditambah')
           window.location.href= '../dbAdmin.php'

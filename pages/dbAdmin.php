@@ -133,23 +133,30 @@ require 'cekAdmin.php';
           <i class="fas fa-table mr-1"></i>
           Daftar Produk
         </div>
+
         <div class="card-body">
-          
           <!-- Button trigger modal tambah baru -->
           <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
             Tambah Produk Baru
           </button>
-
           <!-- Button trigger modal tambah stok-->
           <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter2">
             Tambah Stok Produk
           </button>
-
           <!-- Button trigger modal hapus produk-->
           <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter3">
             Hapus Produk
           </button>
 
+          <!-- konfirmasi -->
+          <?php
+            if(isset($_SESSION['idtransaksi'])){
+          ?>
+          <a href="produk/aksitambah.php" name="konfirmasi" class="btn btn-success">Konfirmasi</a>
+
+          <?php
+            }
+          ?>
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
@@ -163,9 +170,9 @@ require 'cekAdmin.php';
               </thead>
               <tbody>
                 <?php
-                          $ambilProduk = mysqli_query($conn,"SELECT * FROM produk");
-                          while($fetchArray = mysqli_fetch_array($ambilProduk)){
-                      ?>
+                  $ambilProduk = mysqli_query($conn,"SELECT * FROM produk");
+                  while($fetchArray = mysqli_fetch_array($ambilProduk)){
+                ?>
                 <tr>
                   <td><?= $fetchArray['idProduk'] ?></td>
                   <td><?= $fetchArray['idType'] ?></td>
@@ -174,16 +181,13 @@ require 'cekAdmin.php';
                   <td><?= $fetchArray['stok'] ?></td>
                 </tr>
                 <?php
-                          }
-                      ?>
+                  }
+                ?>
               </tbody>
-
             </table>
           </div>
         </div>
       </div>
-    </div>
-
     </div>
     <footer class="footer py-4  ">
       <div class="container-fluid">
@@ -197,8 +201,6 @@ require 'cekAdmin.php';
         </div>
       </div>
     </footer>
-    </div>
-
   </main>
   <!-- Modal tambah produk-->
   <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
@@ -207,7 +209,7 @@ require 'cekAdmin.php';
       <div class="modal-content">
         <!-- modal header -->
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Tambah Produk Baru</h5>
         </div>
         
         <!-- modal body -->
@@ -220,24 +222,28 @@ require 'cekAdmin.php';
             <div class="input-group input-group-dynamic mb-4 col-xs-2">
               <label class='form-label'>Nama Obat</label>
               <input type="text" name='nama' class="form-control" required>
-            </div>                   
+            </div>   
+
+            
+
             <div class="input-group input-group-dynamic mb-4 col-xs-2">
                 <!-- <label class="form-label">Kode Tipe Obat</label> -->
-                <select name='idType' placeholder="Kategori Obat" class="form-control" required>
+              <select name='idType' placeholder="Kategori Obat" class="form-control" required>
                   <?php
-                          $ambilKategori = mysqli_query($conn,"SELECT * FROM typeproduk");
-                          while($fetchArray = mysqli_fetch_array($ambilKategori)){
-                            $nama = $fetchArray['nama'];
-                            $id = $fetchArray['idType'];
-                        ?>
+                    $ambilKategori = mysqli_query($conn,"SELECT * FROM typeproduk");
+                    while($fetchArray = mysqli_fetch_array($ambilKategori)){
+                    $nama = $fetchArray['nama'];
+                    $id = $fetchArray['idType'];
+                  ?>
 
                   <option value="<?=$id;?>"><?=$nama?></option>
 
                   <?php
-                          }
-                        ?>
-                </select>
+                    }
+                  ?>
+              </select>
             </div>   
+
             <div class="input-group input-group-dynamic mb-4 col-xs-2">
                 <label class='form-label'>Harga</label>
                 <input type="number" name='harga' class="form-control" required>
@@ -246,13 +252,17 @@ require 'cekAdmin.php';
                 <label class='form-label'>Jumlah Barang</label>
                 <input type="number" name='stok' class="form-control" required>
             </div>
+
+            <?php
+            if(!isset($_SESSION['idtransaksi'])){
+            ?>
             <div class="input-group input-group-dynamic mb-4 col-xs-2">
                 <!-- <label class="form-label">Kode Tipe Obat</label> -->
                 <select name='supplier' placeholder="Kategori Obat" class="form-control" required>
                   <?php
                           $ambil = mysqli_query($conn,"SELECT * FROM supplier");
                           while($fetchArray = mysqli_fetch_array($ambil)){
-                            $nama = $fetchArray['nama'];
+                            $nama = $fetchArray['namaSupplier'];
                             $id = $fetchArray['idSupplier'];
                         ?>
 
@@ -263,6 +273,10 @@ require 'cekAdmin.php';
                         ?>
                 </select>
             </div>
+
+            <?php 
+              } 
+            ?>
             <div class="input-group input-group-dynamic mb-4 col-xs-2">
                 <!-- <label class='form-label'>Upload Gambar</label> -->
                 <input type="file" name='gambar' class="form-control" required>
@@ -273,7 +287,6 @@ require 'cekAdmin.php';
           <div class="modal-footer">
             <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
             <button type="submit" name="tambah" class="btn btn-danger">Tambah</button>
-            <button type="submit" name="konfirmasi" class="btn btn-success">Konfirmasi</button>
           </div>
 
         </form>
@@ -289,7 +302,7 @@ require 'cekAdmin.php';
       <div class="modal-content">
         <!-- modal header -->
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Tambah Stok Produk</h5>
         </div>
         
         <!-- modal body -->
@@ -311,6 +324,30 @@ require 'cekAdmin.php';
                         ?>
                 </select>
             </div>
+
+            <?php
+            if(!isset($_SESSION['idtransaksi'])){
+            ?>
+            <div class="input-group input-group-dynamic mb-4 col-xs-2">
+                <!-- <label class="form-label">Kode Tipe Obat</label> -->
+                <select name='supplier' placeholder="Kategori Obat" class="form-control" required>
+                  <?php
+                          $ambil = mysqli_query($conn,"SELECT * FROM supplier");
+                          while($fetchArray = mysqli_fetch_array($ambil)){
+                            $nama = $fetchArray['namaSupplier'];
+                            $id = $fetchArray['idSupplier'];
+                        ?>
+
+                  <option value="<?=$id;?>"><?=$nama?></option>
+
+                  <?php
+                          }
+                        ?>
+                </select>
+            </div>
+            <?php
+              }
+            ?>
             <div class="input-group input-group-dynamic mb-4 col-xs-2">
                 <label class='form-label'>Jumlah Barang</label>
                 <input type="number" name='stok' class="form-control" required>
@@ -336,14 +373,14 @@ require 'cekAdmin.php';
       <div class="modal-content">
         <!-- modal header -->
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Hapus Produk</h5>
         </div>
         
         <!-- modal body -->
         <form action='produk/hapusproduk.php' method='POST'>
           <div class="modal-body">       
             <div class="input-group input-group-dynamic mb-4 col-xs-2">
-                <select name='idProduk' placeholder="Kategori Obat" class="form-control" required>
+                <select name='idProduk' placeholder="" class="form-control" required>
                   <?php
                           $ambilKategori = mysqli_query($conn,"SELECT * FROM produk");
                           while($fetchArray = mysqli_fetch_array($ambilKategori)){
@@ -354,8 +391,8 @@ require 'cekAdmin.php';
                   <option value="<?=$id;?>"><?=$nama?></option>
 
                   <?php
-                          }
-                        ?>
+                    }
+                  ?>
                 </select>
             </div>
           </div>
@@ -400,7 +437,7 @@ require 'cekAdmin.php';
   <script src="../assets/js/dataTable.js"></script>
 
   <!-- jQuery library -->
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
 
   <!-- Popper JS -->
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>

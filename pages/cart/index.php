@@ -35,11 +35,11 @@
                         <label for="show-features">Features</label>
                         <ul>
                             <li><a href="#">Obat Sakit Kepala</a></li>
-                            <li><a href="#">Obat Sakit Kepala</a></li>
-                            <li><a href="#">Obat Sakit Kepala</a></li>
-                            <li><a href="#">Obat Sakit Kepala</a></li>
-                            <li><a href="#">Obat Sakit Kepala</a></li>
-                            <li><a href="#">Obat Sakit Kepala</a></li>
+                            <li><a href="#">Obat Batuk Pilek</a></li>
+                            <li><a href="#">Obat Sakit Perut</a></li>
+                            <li><a href="#">Obat Oles</a></li>
+                            <li><a href="#">Obat Anak - Anak</a></li>
+                            <li><a href="#">Obat Pereda rasa sakit</a></li>
                         </ul>
                     </li>
                 </ul>
