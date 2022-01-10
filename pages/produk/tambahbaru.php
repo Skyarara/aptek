@@ -20,15 +20,23 @@ require '../fungsiadmin.php';
         $folder = "image/".$filename;
 
         $idAdmin = $_SESSION['id'];
-        $idmasuk = $_SESSION['idmasuk'];
 
         $tambahbaru = "INSERT INTO produk (idProduk, idType, nama, harga, stok, gambar) VALUES('$kodeproduk', '$kodetipe', '$nama', '$harga', '$jumlah', '$filename')";
-        $transmasuk = "INSERT INTO transaksimasuk (idSupplier, idAdmin) VALUES('$supplier','$idAdmin' )";
-
-
         $query = mysqli_query($conn, $tambahbaru);
 
-        if (move_uploaded_file($tempname, $folder) && $transmasuk)  {
+        if(!isset($_SESSION['idtransaksi'])){
+          $transmasuk = mysqli_query($conn,"INSERT INTO transaksimasuk (idTransaksiMasuk, idSupplier, idAdmin) VALUES('','$supplier','$idAdmin' )");
+          $idmasuk = mysqli_insert_id($conn);
+          $_SESSION['idtransaksi'] = $idmasuk;
+        }
+
+        $idmasuk = $_SESSION['idtransaksi'];
+
+        $detailmasuk = mysqli_query($conn,"INSERT INTO detailmasuk (idTransaksiMasuk, idProduk, jumlahBarang) VALUES('$idmasuk', '$kodeproduk','$jumlah')");
+
+        
+
+        if (move_uploaded_file($tempname, $folder))  {
           $msg = "Image uploaded successfully";
           header('location: ../dbAdmin.php');
         }else{
