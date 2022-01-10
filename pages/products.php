@@ -1,3 +1,13 @@
+<?php
+session_start();
+if (isset($_SESSION['nama'])) 
+{
+	echo "";  
+}
+else if (!isset ($_SESSION['nama'])){
+	header ("Location: pages/sign-in.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en" >
 <head>

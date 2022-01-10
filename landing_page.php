@@ -1,3 +1,13 @@
+<?php
+session_start();
+    if (isset($_SESSION['nama'])) 
+    {
+        echo "";  
+    }
+    else if (!isset ($_SESSION['nama'])){
+        header ("Location: pages/sign-in.php");
+    }
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -28,7 +38,7 @@
             <div class="overlay">
                 <a href="#" class="explore-btn">Telusuri</a>
             </div>
-        </div>
+        </div>  
 
         <div class="detail-box">
             <div class="type">
