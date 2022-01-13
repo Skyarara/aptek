@@ -28,48 +28,45 @@
             </label>
             <div class="content">
                 <div class="logo mb-1">
-                    <a href="#"><img src="../../logo_hewodoc.png" alt=""></a>
+                    <a href="#"><img src="../logo_hewodoc.png" alt=""></a>
                 </div>
                 <ul class="links mt-3">
                     <li>
-                        <a href="#">Home</a>
+                        <a href="cart/index.php" style="text-decoration: none;">Beranda</a>
                     </li>
                     <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#" class="desktop-link">Category</a>
+                        <a href="cart/index.php" class="desktop-link" style="text-decoration: none;">Kategori</a>
                         <input type="checkbox" id="show-features">
                         <label for="show-features">Features</label>
                         <ul>
                             <li>
-                                <a href="#">Obat Sakit Kepala</a>
+                                <a href="cart/index.php" style="text-decoration: none;">Obat Sakit Kepala</a>
                             </li>
                             <li>
-                                <a href="#">Obat Sakit Kepala</a>
+                                <a href="cart/index.php" style="text-decoration: none;">Obat Batuk Pilek</a>
                             </li>
                             <li>
-                                <a href="#">Obat Sakit Kepala</a>
+                                <a href="cart/index.php" style="text-decoration: none;">Obat Sakit Perut</a>
                             </li>
                             <li>
-                                <a href="#">Obat Sakit Kepala</a>
+                                <a href="cart/index.php" style="text-decoration: none;">Obat Oles</a>
                             </li>
                             <li>
-                                <a href="#">Obat Sakit Kepala</a>
+                                <a href="cart/index.php" style="text-decoration: none;">Obat Anak - Anak</a>
                             </li>
                             <li>
-                                <a href="#">Obat Sakit Kepala</a>
+                                <a href="cart/index.php" style="text-decoration: none;">Obat Pereda Rasa Sakit</a>
                             </li>
                         </ul>
                     </li>
                 </ul>
                 <div class="boxContainer">
                     <table class="elementsContainer">
-                        <input type="text" placeholder="Search" class="search">
+                        <input type="text" placeholder="Cari" class="search">
                     </table>
                 </div>
                 <div class="feature">
-                    <a href="#" style="color: #f2f2f2;">Login/Register</a>
+                    <a href="logout.php" style="color: #f2f2f2; text-decoration: none;">Logout</a>
                 </div>
             </div>
 

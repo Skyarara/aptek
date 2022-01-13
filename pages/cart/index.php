@@ -1,28 +1,21 @@
 <?php
     require_once '../fungsiadmin.php';
-    
-    // // Tidak ada kategori
-    // if(isset($_GET['jenis']) == NULL){
-        $sql = "SELECT * FROM produk";
-    // // Sakit kepala
-    // }else if($_GET['jenis'] == 0){
-    //     $sql = "SELECT * FROM produk WHERE idType = 'K01'";
-    // // Batuk pilek
-    // }else if($_GET['jenis'] == 1){
-    //     $sql = "SELECT * FROM produk WHERE idType = 'K02'";            
-    // // Sakit Perut
-    // }else if($_GET['jenis'] == 2){
-    //     $sql = "SELECT * FROM produk WHERE idType = 'K03'";
-    // // Obat Oles
-    // }else if($_GET['jenis'] == 3){
-    //     $sql = "SELECT * FROM produk WHERE idType = 'K04'";
-    // // Obat anak anak
-    // }else if($_GET['jenis'] == 4){
-    //     $sql = "SELECT * FROM produk WHERE idType = 'K05'";
-    // //Pereda rasa sakit
-    // }else if($_GET['jenis'] == 5){
-    //     $sql = "SELECT * FROM produk WHERE idType = 'K06'";
-    // }
+    if(isset($_SESSION['products']) && isset($_GET['reset'])){
+        unset($_SESSION["products"]);
+        echo '<script>window.location.href = "index.php"</script>';
+    }elseif(isset($_GET['reset'])){
+        echo '<script>window.location.href = "index.php"</script>';
+    }elseif(isset($_SESSION['products'])){
+        echo'
+            <script>
+                if (confirm("Produk dalam keranjang akan terhapus") == true){
+                    document.location.search = "reset=yes";
+                }else{ 
+                    window.location.href = "../checkout.php";
+                }
+            </script> ';
+    }
+    $sql = "SELECT * FROM produk";
     $query = mysqli_query($conn, $sql);
 ?>
 
@@ -50,10 +43,9 @@
             <div class="content">
                 <div class="logo"><a href="#"><img src="../../logo_hewodoc.png" alt=""></a></div>
                 <ul class="links">
-                    <li><a href="../../landing_page.php">Home</a></li>
-                    <li><a href="#">About</a></li>
+                    <li><a href="index.php">Beranda</a></li>
                     <li>
-                        <a href="#" class="desktop-link">Category</a>
+                        <a href="#" class="desktop-link">Kategori</a>
                         <input type="checkbox" id="show-features">
                         <label for="show-features">Features</label>
                         <ul>
@@ -74,34 +66,18 @@
                 </ul>
                 <div class="boxContainer">
                     <table class="elementsContainer">
-                        <input type="text" placeholder="Search" class="search" onkeyup="search(this)">
+                        <input type="text" placeholder="Cari" class="search" onkeyup="search(this)">
                     </table>
                 </div>
                 <div class="feature">
-                    <a href="../logout.php">Logout</a>
+                    <a href="../logout.php" style="color: #f2f2f2;">Logout</a>
                 </div>
             </div>
         </nav>
     </div>
-    <?php 
-        $id = $_GET['jenis'];
-    ?>
+
     <section class="container content-section">
-        <?php if(!isset($_GET['jenis'])){ ?>
-        <h2 class="section-header">Daftar Obat</h2>
-        <?php } else if($id == 0) { ?>
-        <h2 class="section-header">Obat Sakit Kepala</h2>
-        <?php } else if($id == 1) { ?>
-        <h2 class="section-header">Obat Batuk Pilek</h2>
-        <?php } else if($id == 2) { ?>
-        <h2 class="section-header">Obat Sakit Perut</h2>
-        <?php } else if($id == 3) { ?>
-        <h2 class="section-header">Obat Oles</h2>
-        <?php } else if($id == 4) { ?>
-        <h2 class="section-header">Obat Anak - Anak</h2>
-        <?php } else if($id == 5) { ?>
-        <h2 class="section-header">Obat Pereda Rasa Sakit</h2>
-        <?php } ?>
+        <h2 class="section-header" style="font-family: 'Poppins', sans-serif; font-weight: 600;">Daftar Obat</h2>
         <div class="shop-items" id='shop-items'>
             <?php while($data = mysqli_fetch_assoc($query)): ?>
             <div class="shop-item" data-name='<?= $data['nama'] ?>' data-kategori='<?= $data['idType'] ?>'>
@@ -111,18 +87,18 @@
                 <div class="shop-item-details">
                     <span class="shop-item-price">Rp<?= $data['harga'] ?></span>
                     <a class="shop-item-real_price" hidden><?= $data['harga'] ?></a>
-                    <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                    <button class="btn btn-primary shop-item-button" type="button">TAMBAH</button>
                 </div>
             </div>
             <?php endwhile; ?>
         </div>
     </section>
     <section class="container content-section">
-        <h2 class="section-header">CART</h2>
+        <h2 class="section-header" style="font-family: 'Poppins', sans-serif; font-weight: 600;">KERANJANG</h2>
         <div class="cart-row">
-            <span class="cart-item cart-header cart-column">ITEM</span>
-            <span class="cart-price cart-header cart-column">PRICE</span>
-            <span class="cart-quantity cart-header cart-column">QUANTITY</span>
+            <span class="cart-item cart-header cart-column">BARANG</span>
+            <span class="cart-price cart-header cart-column">HARGA</span>
+            <span class="cart-quantity cart-header cart-column">JUMLAH</span>
         </div>
         <form action="aksiCheckout.php" method="POST">
             <div class="cart-items">
@@ -132,9 +108,9 @@
                 <strong class="cart-total-title">Total</strong>
                 <span class="cart-total-price">Rp0</span>
             </div>
-            <button class="btn btn-primary btn-purchase" type="submit">PURCHASE</button>
+            <button class="btn btn-primary btn-purchase" type="submit">CHECKOUT</button>
         </form>
     </section>
 </body>
 
-</html>
+</html> 

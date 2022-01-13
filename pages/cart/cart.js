@@ -27,7 +27,7 @@ function ready() {
 }
 
 function purchaseClicked() {
-    alert('Thank you for your purchase')
+    
 }
 
 function removeCartItem(event) {
@@ -63,7 +63,7 @@ function addItemToCart(title, price, imageSrc, id, real_price) {
     var cartItemNames = cartItems.getElementsByClassName('cart-item-title')
     for (var i = 0; i < cartItemNames.length; i++) {
         if (cartItemNames[i].innerText == title) {
-            alert('This item is already added to the cart')
+            alert('Barang ini sudah ada dalam keranjang')
             return
         }
     }
@@ -79,7 +79,7 @@ function addItemToCart(title, price, imageSrc, id, real_price) {
         <input type="hidden" name="harga[]" value="${real_price}"></input>
         <div class="cart-quantity cart-column">
             <input class="cart-quantity-input" type="number" name="qty[]" value="1">
-            <button class="btn btn-danger" type="button">REMOVE</button>
+            <button class="btn btn-danger" type="button">HAPUS</button>
         </div>`
     cartRow.innerHTML = cartRowContents
     cartItems.append(cartRow)
