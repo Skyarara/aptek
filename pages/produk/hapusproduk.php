@@ -22,7 +22,7 @@ require '../fungsiadmin.php';
 
     if ($deleteproduk && unlink($hapusgambar))  {
       echo "<script type='text/javascript'>
-      alert('data berhasil ditambah')
+      alert('data berhasil dihapus')
       window.location.href= '../dbAdmin.php'
       </script>";
     }else{
