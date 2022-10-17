@@ -1,28 +1,22 @@
 <?php
     require_once '../fungsiadmin.php';
-    
-    // // Tidak ada kategori
-    // if(isset($_GET['jenis']) == NULL){
-        $sql = "SELECT * FROM produk";
-    // // Sakit kepala
-    // }else if($_GET['jenis'] == 0){
-    //     $sql = "SELECT * FROM produk WHERE idType = 'K01'";
-    // // Batuk pilek
-    // }else if($_GET['jenis'] == 1){
-    //     $sql = "SELECT * FROM produk WHERE idType = 'K02'";            
-    // // Sakit Perut
-    // }else if($_GET['jenis'] == 2){
-    //     $sql = "SELECT * FROM produk WHERE idType = 'K03'";
-    // // Obat Oles
-    // }else if($_GET['jenis'] == 3){
-    //     $sql = "SELECT * FROM produk WHERE idType = 'K04'";
-    // // Obat anak anak
-    // }else if($_GET['jenis'] == 4){
-    //     $sql = "SELECT * FROM produk WHERE idType = 'K05'";
-    // //Pereda rasa sakit
-    // }else if($_GET['jenis'] == 5){
-    //     $sql = "SELECT * FROM produk WHERE idType = 'K06'";
-    // }
+
+    if(isset($_SESSION['products']) && isset($_GET['reset'])){
+        unset($_SESSION["products"]);
+        echo '<script>window.location.href = "index.php"</script>';
+        }elseif(isset($_GET['reset'])){
+            echo '<script>window.location.href = "index.php"</script>';
+        }elseif(isset($_SESSION['products'])){
+            echo'
+                <script>
+                    if (confirm("jika anda kembali maka data produk di cart anda akan terhapus Wave to alvon") == true){
+                        document.location.search = "reset=yes";
+                    }else{ 
+                        window.location.href = "../checkout.php";
+                    }
+                </script> ';
+        }
+    $sql = "SELECT * FROM produk";
     $query = mysqli_query($conn, $sql);
 ?>
 
@@ -50,8 +44,7 @@
             <div class="content">
                 <div class="logo"><a href="#"><img src="../../logo_hewodoc.png" alt=""></a></div>
                 <ul class="links">
-                    <li><a href="../../landing_page.php">Home</a></li>
-                    <li><a href="#">About</a></li>
+                    <li><a href="">Home</a></li>
                     <li>
                         <a href="#" class="desktop-link">Category</a>
                         <input type="checkbox" id="show-features">

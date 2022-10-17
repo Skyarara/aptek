@@ -22,7 +22,7 @@ foreach ($_POST['qty'] as $key => $value) {
 $data = $_SESSION['products'];
 
 // foreach ($data as $dt) {
-    // echo $dt['id'].$dt['nama']."<br>";
+// echo $dt['id'].$dt['nama']."<br>";
 //     foreach($dt as $key => $value) {
 //         echo "<br>$key : $value<br>";
 //     }
